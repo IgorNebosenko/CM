@@ -1,3 +1,14 @@
 {
-	"name": "CM.Input"
+    "name": "CM.Input",
+    "rootNamespace": "CM.Input",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

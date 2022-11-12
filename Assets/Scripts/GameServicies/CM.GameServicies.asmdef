@@ -1,3 +1,14 @@
 {
-	"name": "CM.GameServicies"
+    "name": "CM.GameServicies",
+    "rootNamespace": "CM.GameServicies",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

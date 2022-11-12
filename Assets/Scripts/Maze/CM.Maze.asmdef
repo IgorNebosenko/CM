@@ -1,3 +1,14 @@
 {
-	"name": "CM.Maze"
+    "name": "CM.Maze",
+    "rootNamespace": "CM.Maze",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

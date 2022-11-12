@@ -1,3 +1,14 @@
 {
-	"name": "CM.Analytics"
+    "name": "CM.Analytics",
+    "rootNamespace": "CM.Analytics",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

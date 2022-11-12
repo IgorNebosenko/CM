@@ -1,3 +1,14 @@
 {
-	"name": "CM.Entities"
+    "name": "CM.Entities",
+    "rootNamespace": "CM.Entities",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
