@@ -217,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5333916675091542859, guid: 6d2893e67c34e864c9c67041128e00c4, type: 3}
       propertyPath: m_Name
-      value: Spawner South-West
+      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 5333916675091542859, guid: 6d2893e67c34e864c9c67041128e00c4, type: 3}
       propertyPath: m_IsActive
