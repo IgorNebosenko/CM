@@ -6,11 +6,27 @@ namespace CM.Maze
     [Serializable]
     public class MazeConnectionData
     {
-        public bool[] upConnection;
-        public bool[] rightConnection;
-        public bool[] downConnection;
-        public bool[] leftConnection;
+        public MazeLineData[] data;
 
         public Transform[] spawnPoints;
+
+        public MazeConnectionData(int sizeX, int sizeZ)
+        {
+            data = new MazeLineData[sizeX];
+
+            for (var i = 0; i < sizeX; i++)
+                data[i] = new MazeLineData(sizeZ);
+        }
+    }
+
+    [Serializable]
+    public class MazeLineData
+    {
+        public bool[] lineData;
+
+        public MazeLineData(int size)
+        {
+            lineData = new bool[size];
+        }
     }
 }

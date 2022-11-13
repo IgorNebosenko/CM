@@ -140,3 +140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba4242a6acc3c841bb7cac80a395003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectionData:
+    data:
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    - lineData: 00000000000000
+    spawnPoints: []
