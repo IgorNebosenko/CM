@@ -11,9 +11,11 @@ namespace CM.Core
         
         public override void InstallBindings()
         {
-            Container.Bind<MazeSegmentsConfig>().FromInstance(_segmentData).AsSingle();
+            Container.Bind<MazeSegmentsConfig>().FromInstance(_segmentData).AsSingle(); //for different segments
 
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
+
+            BindManagerExplicit<GameManager>();
         }
 
 

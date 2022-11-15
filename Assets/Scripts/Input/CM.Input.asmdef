@@ -1,7 +1,9 @@
 {
     "name": "CM.Input",
     "rootNamespace": "CM.Input",
-    "references": [],
+    "references": [
+        "GUID:142c7281c4c6a6d408d164eb0ef4b6ea"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

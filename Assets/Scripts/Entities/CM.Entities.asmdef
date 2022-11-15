@@ -1,7 +1,9 @@
 {
     "name": "CM.Entities",
     "rootNamespace": "CM.Entities",
-    "references": [],
+    "references": [
+        "GUID:342fbbb794eedbf4ab0e6d8f8480566e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
