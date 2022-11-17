@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using CM.Core.Utils;
 using UnityEngine;
 
-namespace CM.Core.MVP
+#if ELECTRUM_CORE
+using ElectrumGames.Core;
+#else
+using ElectrumGames.MVP.Utils;
+#endif
+
+namespace ElectrumGames.MVP
 {
     public interface IPresenter
     {
