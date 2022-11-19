@@ -6,7 +6,7 @@ namespace ElectrumGames.MVP.Managers
 {
     public class PopupManager : BasePopupManager
     {
-        protected PopupManager(List<(Type view, Type presenter)> viewPresenterPairs, Transform viewContainer, PresenterFactory factory) : 
+        public PopupManager(List<(Type view, Type presenter)> viewPresenterPairs, Transform viewContainer, PresenterFactory factory) : 
             base(viewContainer, factory)
         {
             ManualRegisterViews();

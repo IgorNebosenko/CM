@@ -6,7 +6,7 @@ namespace ElectrumGames.MVP.Managers
 {
     public class ViewManager : BaseViewManager
     {
-        protected ViewManager(List<(Type view, Type presenter)> viewPresenterPairs, Transform viewContainer, PresenterFactory factory) :
+        public ViewManager(List<(Type view, Type presenter)> viewPresenterPairs, Transform viewContainer, PresenterFactory factory) :
             base(viewContainer, factory)
         {
             ManualRegisterViews();
