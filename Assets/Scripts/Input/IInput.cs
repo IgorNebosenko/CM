@@ -4,7 +4,7 @@ namespace CM.Input
 {
     public interface IInput
     {
-        void Init(ICameraInput cameraInput);
+        void Init();
         void Simulate(float deltaTime);
     }
 }

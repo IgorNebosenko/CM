@@ -1,8 +1,6 @@
-﻿using CM.Input.CameraController;
-
-namespace CM.Input
+﻿namespace CM.Input
 {
-    public class PlayerInput : IInput
+    public class EnemyInput : IInput
     {
         public void Init()
         {
@@ -12,10 +10,6 @@ namespace CM.Input
         public void Simulate(float deltaTime)
         {
             throw new System.NotImplementedException();
-        }
-
-        public void SetCameraInput(ICameraInput cameraInput)
-        {
         }
     }
 }
