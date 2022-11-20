@@ -7,7 +7,7 @@ using ElectrumGames.MVP.Utils;
 using UnityEngine;
 using Zenject;
 
-namespace CM.Core
+namespace CM.UI
 {
     public class BaseSceneInstaller : MonoInstaller<BaseSceneInstaller>
     {
