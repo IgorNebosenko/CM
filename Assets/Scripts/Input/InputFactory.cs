@@ -9,8 +9,9 @@ namespace CM.Input
             throw new NotImplementedException();
         }
 
-        public IInput CreateMonsterInput()
+        public IInput CreateMonsterInput(IHavePosition playerPosition)
         {
+            throw new NotImplementedException();
         }
     }
 }

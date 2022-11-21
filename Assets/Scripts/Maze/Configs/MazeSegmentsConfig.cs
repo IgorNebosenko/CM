@@ -1,7 +1,7 @@
 using CM.Maze;
 using UnityEngine;
 
-namespace CM.Configs
+namespace CM.Maze.Configs
 {
     [CreateAssetMenu(menuName = "Configs/MazeSegments", fileName = "MazeSegments")]
     public class MazeSegmentsConfig : ScriptableObject

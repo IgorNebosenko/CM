@@ -2408,7 +2408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7535960022eb6d43bffe2de6a2eaf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _segmentData: {fileID: 11400000, guid: 2f5093a9444d9fc4cb1132390020ba39, type: 2}
+  segmentData: {fileID: 11400000, guid: 2f5093a9444d9fc4cb1132390020ba39, type: 2}
+  entityConfig: {fileID: 11400000, guid: 101d9f095a7f6df48b97979110d71fc7, type: 2}
 --- !u!114 &1543764316
 MonoBehaviour:
   m_ObjectHideFlags: 0

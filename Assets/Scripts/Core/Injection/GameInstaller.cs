@@ -1,5 +1,6 @@
-using CM.Configs;
+using CM.Maze.Configs;
 using CM.Core.Managers;
+using CM.Entities.Configs;
 using UnityEngine;
 using Zenject;
 
@@ -7,11 +8,13 @@ namespace CM.Core
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private MazeSegmentsConfig _segmentData;
-        
+        [SerializeField] private MazeSegmentsConfig segmentData;
+        [SerializeField] private EntityConfig entityConfig;
+
         public override void InstallBindings()
         {
-            Container.Bind<MazeSegmentsConfig>().FromInstance(_segmentData).AsSingle(); //for different segments
+            Container.Bind<MazeSegmentsConfig>().FromInstance(segmentData).AsSingle(); //for different segments
+            Container.Bind<EntityConfig>().FromInstance(entityConfig).AsSingle();
 
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 

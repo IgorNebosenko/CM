@@ -1,14 +1,61 @@
-﻿namespace CM.Entities
+﻿using System;
+using CM.Entities.Configs;
+using CM.Input;
+using UnityEngine;
+
+namespace CM.Entities
 {
-    public class EntityFactory
+    public class EntityFactory : IDisposable
     {
         private InputFactory _inputFactory;
+        private EntityConfig _entityConfig;
+
+        private Transform _root;
+
+        private IHavePosition _playerPosition;
         
-        public EntityFactory(InputFactory inputFactory)
+        public EntityFactory(InputFactory inputFactory, EntityConfig entityConfig)
         {
             _inputFactory = inputFactory;
+            _entityConfig = entityConfig;
+
+            _root = GameObject.Instantiate(new GameObject()).transform;
+            _root.position = Vector3.zero;
         }
-        
-        public IEntity GetPlayerEntity()
+
+        public PlayerEntity GetPlayerEntity(Vector3 startPosition, Quaternion startRotation)
+        {
+            var playerData = _entityConfig.GetPlayerData();
+            
+            var entity = GameObject.Instantiate(playerData.playerEntity, startPosition, startRotation, _root);
+            entity.Init(playerData.data, _inputFactory.CreatePlayerInput());
+            _playerPosition = entity;
+
+            return entity;
+        }
+
+        public MonsterEntity GetMonsterEntity(Vector3 startPosition)
+        {
+            var monsterData = _entityConfig.GetMonsterData();
+
+            var entity = GameObject.Instantiate(monsterData.monsterEntity, startPosition, Quaternion.identity, _root);
+            entity.Init(monsterData.data, _inputFactory.CreateMonsterInput(_playerPosition));
+
+            return entity;
+        }
+
+
+        public void Dispose()
+        {
+            foreach (GameObject child in _root)
+            {
+                if (child.TryGetComponent<IEntity>(out var entity))
+                    entity.Dispose();
+                
+                GameObject.Destroy(child);
+            }
+            
+            GameObject.Destroy(_root);
+        }
     }
 }
