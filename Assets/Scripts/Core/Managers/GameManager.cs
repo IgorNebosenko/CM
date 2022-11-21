@@ -1,6 +1,6 @@
-﻿using CM.Core.Managers;
+﻿using CM.Core.Management;
 
-namespace CM.Core
+namespace CM.Core.Managers
 {
     public class GameManager : IUpdateManager
     {

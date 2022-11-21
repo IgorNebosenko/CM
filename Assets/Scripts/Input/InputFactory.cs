@@ -4,6 +4,11 @@ namespace CM.Input
 {
     public class InputFactory
     {
+        public InputFactory( )
+        {
+            
+        }
+        
         public IInput CreatePlayerInput()
         {
             throw new NotImplementedException();

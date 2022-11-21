@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CM.Core.Managers
+namespace CM.Core.Management
 {
     public class ManagersRunner : IManagersRunner, IManagerProvider
     {

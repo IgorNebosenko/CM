@@ -1,4 +1,4 @@
-﻿namespace CM.Core.Managers
+﻿namespace CM.Core.Management
 {
     public interface IManagersRunner
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace CM.Core.Managers
+namespace CM.Core.Management
 {
     public class ManagersExecutor : MonoBehaviour
     {

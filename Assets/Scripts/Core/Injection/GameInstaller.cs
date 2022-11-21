@@ -1,6 +1,8 @@
 using CM.Maze.Configs;
+using CM.Core.Management;
 using CM.Core.Managers;
 using CM.Entities.Configs;
+using CM.Input;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +21,7 @@ namespace CM.Core
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 
             BindManagerExplicit<GameManager>();
+            BindManagerExplicit<InputManager>();
         }
 
 
