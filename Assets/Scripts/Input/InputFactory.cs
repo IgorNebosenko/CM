@@ -4,9 +4,11 @@ namespace CM.Input
 {
     public class InputFactory
     {
-        public InputFactory( )
+        private InputManager _inputManager;
+        
+        public InputFactory(InputManager inputManager)
         {
-            
+            _inputManager = inputManager;
         }
         
         public IInput CreatePlayerInput()
