@@ -4,16 +4,16 @@ namespace CM.Input
 {
     public class InputFactory
     {
-        private InputManager _inputManager;
+        private GameControls _gameControls;
         
-        public InputFactory(InputManager inputManager)
+        public InputFactory(GameControls gameControls)
         {
-            _inputManager = inputManager;
+            _gameControls = gameControls;
         }
         
-        public IInput CreatePlayerInput()
+        public PlayerInput CreatePlayerInput()
         {
-            throw new NotImplementedException();
+            return new PlayerInput(_gameControls);
         }
 
         public IInput CreateMonsterInput(IHavePosition playerPosition)

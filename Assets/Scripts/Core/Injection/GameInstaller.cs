@@ -20,6 +20,8 @@ namespace CM.Core
 
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 
+            Container.Bind<GameControls>().AsSingle();
+            
             BindManagerExplicit<GameManager>();
             BindManagerExplicit<InputManager>();
         }

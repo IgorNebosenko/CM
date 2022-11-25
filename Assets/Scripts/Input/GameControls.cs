@@ -42,7 +42,7 @@ namespace CM.Input
                     ""name"": ""ViewMovement"",
                     ""type"": ""Value"",
                     ""id"": ""19f74863-8816-4d78-bb46-853624658d1a"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
