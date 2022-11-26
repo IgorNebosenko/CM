@@ -1,7 +1,8 @@
-using System;
+using System.Collections;
 using CM.UI.UI.Presenters;
 using ElectrumGames.MVP.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace CM.Core
@@ -12,8 +13,7 @@ namespace CM.Core
         [SerializeField] private GameObject[] devElementsList;
 
         private ViewManager _viewManager;
-        private LoadingPresenter _loadingPresenter;
-        
+
         [Inject]
         private void Construct(ViewManager viewManager)
         {
@@ -22,7 +22,7 @@ namespace CM.Core
 
         private void Awake()
         {
-            _loadingPresenter = _viewManager.ShowView<LoadingPresenter>();
+            _viewManager.ShowView<LoadingPresenter>();
         }
 
         private void Start()
@@ -35,12 +35,12 @@ namespace CM.Core
                 if (devElement)
                     Destroy(devElement);
             }
-            
-            EntryStart();
+            StartCoroutine(EntryStart());
         }
 
-        private void EntryStart()
+        private IEnumerator EntryStart()
         {
+            yield return SceneManager.LoadSceneAsync((int) Scenes.MainMenu);
         }
     }
 }
