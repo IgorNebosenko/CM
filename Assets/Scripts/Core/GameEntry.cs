@@ -13,7 +13,6 @@ namespace CM.Core
         [SerializeField] private GameObject[] devElementsList;
 
         private ViewManager _viewManager;
-        private LoadingPresenter _loadingPresenter;
 
         [Inject]
         private void Construct(ViewManager viewManager)
@@ -23,8 +22,7 @@ namespace CM.Core
 
         private void Awake()
         {
-            _loadingPresenter = _viewManager.ShowView<LoadingPresenter>();
-            _loadingPresenter.Close();
+            _viewManager.ShowView<LoadingPresenter>();
         }
 
         private void Start()
