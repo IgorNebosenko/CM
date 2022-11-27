@@ -6,7 +6,8 @@ namespace CM.Maze
 {
     public class MazeManager : IFixedUpdateManager
     {
-        [Inject] private MazeController _mazeController;
+        [Inject] 
+        private MazeController _mazeController;
         
         public void Simulate(float deltaTime)
         {

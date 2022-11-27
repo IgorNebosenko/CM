@@ -5,6 +5,6 @@ namespace CM.Entities
     [Serializable]
     public class EntityData
     {
-        public float speed;
+        public float speed= 1f;
     }
 }

@@ -14,7 +14,8 @@ namespace CM.Input
         private Vector3 _movementViewDirectionCached;
         
         public Vector3 MovementDirection { get; private set; }
-        public Vector3 MovementViewDirection { get; private set; }
+        public float MovementViewDirectionX { get; private set; }
+        public float MovementViewDirectionY { get; private set; }
 
         public PlayerInput(GameControls gameControls)
         {
@@ -30,25 +31,35 @@ namespace CM.Input
         public void Simulate(float deltaTime)
         {
             if (!_isMovementUpdate)
-            {
                 MovementDirection = _movementDirectionCached;
-                return;
+            else
+            {
+                var direction = _gameControls.Player.Movement.ReadValue<Vector2>();
+                MovementDirection = Vector3.right * direction.x + Vector3.forward * direction.y;
+                MovementDirection *= deltaTime;
             }
-
-            var direction = _gameControls.Player.Movement.ReadValue<Vector2>();
-            MovementDirection = Vector3.right * direction.x + Vector3.forward * direction.y;
-            MovementDirection *= deltaTime;
-            
 
             if (!_isMovementViewUpdate)
             {
+                MovementViewDirectionX = _movementViewDirectionCached.x;
+                MovementViewDirectionY = _movementViewDirectionCached.y;
+            }
+            else
+            {
+                var direction = new Vector2(
+                    _gameControls.Player.LookX.ReadValue<float>(),
+                    _gameControls.Player.LookY.ReadValue<float>());
+                Debug.Log($"[DEV] {direction}");
+                MovementViewDirectionX = direction.x * deltaTime; 
+                MovementViewDirectionY = direction.y * deltaTime;
             }
         }
 
         public void ResetInput()
         {
             MovementDirection = Vector2.zero;
-            MovementViewDirection = Vector2.zero;
+            MovementViewDirectionX = 0;
+            MovementViewDirectionY = 0;
         }
 
         public void OnMovement(InputAction.CallbackContext context)
@@ -56,7 +67,12 @@ namespace CM.Input
             _isMovementUpdate = true;
         }
 
-        public void OnViewMovement(InputAction.CallbackContext context)
+        public void OnLookX(InputAction.CallbackContext context)
+        {
+            _isMovementViewUpdate = true;
+        }
+
+        public void OnLookY(InputAction.CallbackContext context)
         {
             _isMovementViewUpdate = true;
         }

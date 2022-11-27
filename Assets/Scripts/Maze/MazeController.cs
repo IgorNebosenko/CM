@@ -10,6 +10,8 @@ namespace CM.Maze
         [SerializeField] private MazeFragment[] mazeFragments;
         [SerializeField] private MazeFragment playerSpawn;
         [SerializeField] private MazeFragment mazeFinish;
+
+        [SerializeField] private Transform roof;
         
         private MazeSegmentsConfig _segmentsConfig;
         

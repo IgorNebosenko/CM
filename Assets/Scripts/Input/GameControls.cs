@@ -39,13 +39,22 @@ namespace CM.Input
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ViewMovement"",
-                    ""type"": ""Value"",
-                    ""id"": ""19f74863-8816-4d78-bb46-853624658d1a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""LookX"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""d6007d2f-8332-4150-b02c-4a0e7ab39340"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3c49bfa6-7cd5-4148-b489-9c03b32acd04"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,12 +225,23 @@ namespace CM.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""80eed068-da2a-4975-827e-b78c9989a206"",
-                    ""path"": """",
+                    ""id"": ""af146f1b-5617-44a4-9fcd-74f491b215ed"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""All"",
-                    ""action"": ""ViewMovement"",
+                    ""groups"": """",
+                    ""action"": ""LookX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bc03a7a-bba3-46ff-bed5-7e1a52757113"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -250,7 +270,8 @@ namespace CM.Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-            m_Player_ViewMovement = m_Player.FindAction("ViewMovement", throwIfNotFound: true);
+            m_Player_LookX = m_Player.FindAction("LookX", throwIfNotFound: true);
+            m_Player_LookY = m_Player.FindAction("LookY", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -311,13 +332,15 @@ namespace CM.Input
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Movement;
-        private readonly InputAction m_Player_ViewMovement;
+        private readonly InputAction m_Player_LookX;
+        private readonly InputAction m_Player_LookY;
         public struct PlayerActions
         {
             private @GameControls m_Wrapper;
             public PlayerActions(@GameControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
-            public InputAction @ViewMovement => m_Wrapper.m_Player_ViewMovement;
+            public InputAction @LookX => m_Wrapper.m_Player_LookX;
+            public InputAction @LookY => m_Wrapper.m_Player_LookY;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -330,9 +353,12 @@ namespace CM.Input
                     @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                    @ViewMovement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnViewMovement;
-                    @ViewMovement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnViewMovement;
-                    @ViewMovement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnViewMovement;
+                    @LookX.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookX;
+                    @LookX.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookX;
+                    @LookX.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookX;
+                    @LookY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
+                    @LookY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
+                    @LookY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -340,9 +366,12 @@ namespace CM.Input
                     @Movement.started += instance.OnMovement;
                     @Movement.performed += instance.OnMovement;
                     @Movement.canceled += instance.OnMovement;
-                    @ViewMovement.started += instance.OnViewMovement;
-                    @ViewMovement.performed += instance.OnViewMovement;
-                    @ViewMovement.canceled += instance.OnViewMovement;
+                    @LookX.started += instance.OnLookX;
+                    @LookX.performed += instance.OnLookX;
+                    @LookX.canceled += instance.OnLookX;
+                    @LookY.started += instance.OnLookY;
+                    @LookY.performed += instance.OnLookY;
+                    @LookY.canceled += instance.OnLookY;
                 }
             }
         }
@@ -359,7 +388,8 @@ namespace CM.Input
         public interface IPlayerActions
         {
             void OnMovement(InputAction.CallbackContext context);
-            void OnViewMovement(InputAction.CallbackContext context);
+            void OnLookX(InputAction.CallbackContext context);
+            void OnLookY(InputAction.CallbackContext context);
         }
     }
 }
