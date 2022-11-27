@@ -84,6 +84,9 @@ namespace ElectrumGames.MVP
                 throw new Exception("View not created or already destroyed");
             
             Closing();
+            _baseView.Hide();
+            _viewClosing.Invoke(_baseView);
+            ViewClosed();
             OnClose?.Invoke(this);
         }
     }
