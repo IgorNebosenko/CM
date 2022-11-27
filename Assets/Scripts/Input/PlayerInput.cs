@@ -10,11 +10,11 @@ namespace CM.Input
         private bool _isMovementUpdate = true;
         private bool _isMovementViewUpdate = true;
 
-        private Vector2 _movementDirectionCached;
-        private Vector2 _movementViewDirectionCached;
+        private Vector3 _movementDirectionCached;
+        private Vector3 _movementViewDirectionCached;
         
-        public Vector2 MovementDirection { get; private set; }
-        public Vector2 MovementViewDirection { get; private set; }
+        public Vector3 MovementDirection { get; private set; }
+        public Vector3 MovementViewDirection { get; private set; }
 
         public PlayerInput(GameControls gameControls)
         {
@@ -29,21 +29,20 @@ namespace CM.Input
 
         public void Simulate(float deltaTime)
         {
-            if (_isMovementUpdate)
+            if (!_isMovementUpdate)
             {
-                MovementDirection = _gameControls.Player.Movement.ReadValue<Vector2>();
-                _isMovementUpdate = false;
-            }
-            else
                 MovementDirection = _movementDirectionCached;
-
-            if (_isMovementViewUpdate)
-            {
-                MovementViewDirection = _gameControls.Player.Movement.ReadValue<Vector2>();
-                _isMovementViewUpdate = false;
+                return;
             }
-            else
-                MovementViewDirection = _movementViewDirectionCached;
+
+            var direction = _gameControls.Player.Movement.ReadValue<Vector2>();
+            MovementDirection = Vector3.right * direction.x + Vector3.forward * direction.y;
+            MovementDirection *= deltaTime;
+            
+
+            if (!_isMovementViewUpdate)
+            {
+            }
         }
 
         public void ResetInput()

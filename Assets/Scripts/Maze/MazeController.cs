@@ -23,7 +23,9 @@ namespace CM.Maze
         {
             var countSpawnPoints = playerSpawn.connectionData.spawnPoints.Length;
 
-            return playerSpawn.connectionData.spawnPoints[Random.Range(0, countSpawnPoints)].position;
+            var spawnPoint = playerSpawn.connectionData.spawnPoints[Random.Range(0, countSpawnPoints)].position;
+            spawnPoint.y = 0;
+            return spawnPoint;
         }
 
         public Vector3 GetMonsterSpawnPoint()
@@ -33,8 +35,9 @@ namespace CM.Maze
             for (var i = 0; i < mazeFragments.Length; i++)
                 listTransforms.AddRange(mazeFragments[i].connectionData.spawnPoints);
 
-            return listTransforms[Random.Range(0, listTransforms.Count)].position;
-
+            var spawnPoint =  listTransforms[Random.Range(0, listTransforms.Count)].position;
+            spawnPoint.y = 0;
+            return spawnPoint;
         }
     }
 }

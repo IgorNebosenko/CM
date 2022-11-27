@@ -20,6 +20,7 @@ namespace CM.Entities
             _entityConfig = entityConfig;
 
             _root = GameObject.Instantiate(new GameObject()).transform;
+            _root.gameObject.name = "Entities";
             _root.position = Vector3.zero;
         }
 

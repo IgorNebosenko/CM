@@ -13,7 +13,9 @@ namespace CM.Input
         
         public PlayerInput CreatePlayerInput()
         {
-            return new PlayerInput(_gameControls);
+            var input = new PlayerInput(_gameControls);
+            input.Init();
+            return input;
         }
 
         public IInput CreateMonsterInput(IHavePosition playerPosition)

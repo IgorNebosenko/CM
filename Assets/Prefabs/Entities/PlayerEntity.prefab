@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008b08a608d44fdfaf2fa6ae668a39f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 5704514653974142854}
 --- !u!143 &5704514653974142854
 CharacterController:
   m_ObjectHideFlags: 0

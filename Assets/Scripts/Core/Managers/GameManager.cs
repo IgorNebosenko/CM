@@ -38,7 +38,7 @@ namespace CM.Core.Managers
             GameTimePassed = 0f;
 
             _entityFactory.GetPlayerEntity(_mazeManager.GetPlayerSpawnPoint(), _mazeManager.GetPlayerRotation());
-            _entityFactory.GetMonsterEntity(_mazeManager.GetMonsterSpawnPoint());
+            //_entityFactory.GetMonsterEntity(_mazeManager.GetMonsterSpawnPoint());
         }
     }
 }
