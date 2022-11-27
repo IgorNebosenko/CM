@@ -3,7 +3,8 @@
     "rootNamespace": "CM.UI",
     "references": [
         "GUID:5e1a1f4f4875f02419c5a1a31b060b4d",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:dc7d577b113f42d41bf30862b5d75494"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

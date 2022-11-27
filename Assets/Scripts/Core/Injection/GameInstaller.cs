@@ -1,8 +1,10 @@
 using CM.Maze.Configs;
 using CM.Core.Management;
 using CM.Core.Managers;
+using CM.Entities;
 using CM.Entities.Configs;
 using CM.Input;
+using CM.Maze;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +14,8 @@ namespace CM.Core
     {
         [SerializeField] private MazeSegmentsConfig segmentData;
         [SerializeField] private EntityConfig entityConfig;
+        [Space] 
+        [SerializeField] private MazeController mazeController;
 
         public override void InstallBindings()
         {
@@ -21,9 +25,14 @@ namespace CM.Core
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 
             Container.Bind<GameControls>().AsSingle();
+
+            Container.Bind<EntityFactory>().AsSingle();
+            Container.Bind<InputFactory>().AsSingle();
             
             BindManagerExplicit<GameManager>();
-            BindManagerExplicit<InputManager>();
+            BindManagerExplicit<MazeManager>();
+
+            Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<MazeManager>();
         }
 
 

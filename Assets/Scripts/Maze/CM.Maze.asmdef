@@ -1,7 +1,9 @@
 {
     "name": "CM.Maze",
     "rootNamespace": "CM.Maze",
-    "references": [],
+    "references": [
+        "GUID:dc7d577b113f42d41bf30862b5d75494"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
