@@ -12,6 +12,8 @@ namespace CM.Core
         [SerializeField] private GameObject[] dontDestroyList;
         [SerializeField] private GameObject[] devElementsList;
 
+        private const int MenuSceneId = 1;
+        
         private ViewManager _viewManager;
 
         [Inject]
@@ -40,7 +42,7 @@ namespace CM.Core
 
         private IEnumerator EntryStart()
         {
-            yield return SceneManager.LoadSceneAsync((int) Scenes.MainMenu);
+            yield return SceneManager.LoadSceneAsync(MenuSceneId);
         }
     }
 }
