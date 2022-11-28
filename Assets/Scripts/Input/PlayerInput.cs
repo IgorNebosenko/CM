@@ -28,7 +28,7 @@ namespace CM.Input
             _gameControls.Enable();
         }
 
-        public void Simulate(float deltaTime)
+        public void Update()
         {
             if (!_isMovementUpdate)
                 MovementDirection = _movementDirectionCached;
@@ -36,7 +36,6 @@ namespace CM.Input
             {
                 var direction = _gameControls.Player.Movement.ReadValue<Vector2>();
                 MovementDirection = Vector3.right * direction.x + Vector3.forward * direction.y;
-                MovementDirection *= deltaTime;
             }
 
             if (!_isMovementViewUpdate)
@@ -49,9 +48,9 @@ namespace CM.Input
                 var direction = new Vector2(
                     _gameControls.Player.LookX.ReadValue<float>(),
                     _gameControls.Player.LookY.ReadValue<float>());
-                Debug.Log($"[DEV] {direction}");
-                MovementViewDirectionX = direction.x * deltaTime; 
-                MovementViewDirectionY = direction.y * deltaTime;
+
+                MovementViewDirectionX = direction.x; 
+                MovementViewDirectionY = direction.y;
             }
         }
 

@@ -7,7 +7,7 @@ namespace CM.Input
         Vector3 MovementDirection { get; }
         
         void Init();
-        void Simulate(float deltaTime);
+        void Update();
         void ResetInput();
     }
 }

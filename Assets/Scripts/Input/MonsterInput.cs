@@ -11,7 +11,7 @@ namespace CM.Input
             throw new System.NotImplementedException();
         }
 
-        public void Simulate(float deltaTime)
+        public void Update()
         {
             throw new System.NotImplementedException();
         }
