@@ -11,7 +11,7 @@ namespace CM.Maze
         
         public void Simulate(float deltaTime)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
         
         public void Destroy()

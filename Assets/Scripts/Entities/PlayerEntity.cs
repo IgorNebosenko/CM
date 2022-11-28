@@ -6,8 +6,8 @@ namespace CM.Entities
 {
     public class PlayerEntity : MonoBehaviour, IEntity, IHavePosition
     {
-        [SerializeField] private float lookXSensitivity = 45;
-        [SerializeField] private float lookYSensitivity = 30;
+        [SerializeField] private float lookXSensitivity = 30;
+        [SerializeField] private float lookYSensitivity = 20;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera _camera;
 
@@ -15,6 +15,7 @@ namespace CM.Entities
         private EntityData _entityData;
 
         private MovementMotor _movementMotor;
+        private CameraMotor _cameraMotor;
         
         public Vector3 Position => transform.position;
 
@@ -24,8 +25,7 @@ namespace CM.Entities
             
             _playerInput.Update();
             _movementMotor.Simulate(deltaTime, _playerInput.MovementDirection, _playerInput.MovementViewDirectionX);
-            
-            _camera.transform.Rotate(Vector3.left * _playerInput.MovementViewDirectionY * lookYSensitivity * deltaTime);
+            _cameraMotor.Simulate(deltaTime, _playerInput.MovementViewDirectionY);
         }
 
         public void Init(EntityData data, IInput input)
@@ -34,6 +34,7 @@ namespace CM.Entities
             _entityData = data;
 
             _movementMotor = new MovementMotor(characterController, transform, _entityData, lookXSensitivity);
+            _cameraMotor = new CameraMotor(_camera.transform, lookYSensitivity);
         }
 
         public void DoDeath()

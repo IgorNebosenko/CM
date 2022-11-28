@@ -49,7 +49,7 @@ Light:
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -217,8 +217,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.44246173, g: 0.44570586, b: 0.5754717, a: 1}
-  m_Intensity: 1
-  m_Range: 5
+  m_Intensity: 0.6
+  m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -314,8 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008b08a608d44fdfaf2fa6ae668a39f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookXSensitivity: 45
-  lookYSensitivity: 30
+  lookXSensitivity: 15
+  lookYSensitivity: 15
   characterController: {fileID: 5704514653974142854}
   _camera: {fileID: 7184678805427678177}
 --- !u!143 &5704514653974142854
@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 5805713895444220567}
   - component: {fileID: 7184678805427678177}
   - component: {fileID: 8523498860368917857}
+  - component: {fileID: 2804141510798844833}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -394,7 +395,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -420,3 +421,16 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8829199932718294798}
   m_Enabled: 1
+--- !u!114 &2804141510798844833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829199932718294798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a0435596064ffaa133a3a70fb33f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableCursor: 0

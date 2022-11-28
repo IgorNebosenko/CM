@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerEntity: {fileID: 3177425900023538395, guid: d979bb2b58a3cd24c965f19cc486b575, type: 3}
   playerExtraData:
-    speed: 3
+    speed: 2
   monsterEntity: {fileID: 2326099087290754852, guid: 3d7850164db22f24cbe61098659b165c, type: 3}
   monsterExtraData:
-    speed: 3
+    speed: 2
