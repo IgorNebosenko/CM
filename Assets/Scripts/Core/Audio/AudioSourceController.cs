@@ -49,31 +49,27 @@ namespace ElectrumGames.Core.Audio
             _memoryPool?.Despawn(this);
         }
 
-        public AudioSourceController SetClip(AudioClip clip)
+        public void SetClip(AudioClip clip)
         {
             audioSource.clip = clip;
-            return this;
         }
 
-        public AudioSourceController SetPreset(AudioSource presetInstance)
+        public void SetPreset(AudioSource presetInstance)
         {
             presetInstance.SetPreset(presetInstance);
-            return this;
         }
 
-        public AudioSourceController Loop(bool state)
+        public void Loop(bool state)
         {
             audioSource.loop = state;
-            return this;
         }
 
-        public AudioSourceController Mute(bool state)
+        public void Mute(bool state)
         {
             audioSource.mute = state;
-            return this;
         }
 
-        private void Play()
+        public void Play()
         {
             audioSource.Play();
             _isClipPlayFinished = false;
