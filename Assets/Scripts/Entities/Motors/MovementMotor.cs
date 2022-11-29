@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace CM.Entities.Motors
 {
@@ -18,15 +19,15 @@ namespace CM.Entities.Motors
             _lookXSensitivity = lookXSensitivity;
         }
 
-        public void Simulate(float deltaTime, Vector3 inputDirection, float additionalAngleLook)
+        public void Simulate(float deltaTime, Vector2 inputDirection, float additionalAngleLook)
         {
-            inputDirection *= deltaTime;
-            
-            var movementDirection = _entityTransform.right * inputDirection.x +
-                                    _entityTransform.forward * inputDirection.z;
-            
-            _characterController.Move(movementDirection * _entityData.speed);
-            _entityTransform.Rotate(Vector3.up * additionalAngleLook * _lookXSensitivity * deltaTime);
+            var velocity = (_entityTransform.right * inputDirection.x + 
+                            _entityTransform.forward * inputDirection.y) *
+                           _entityData.speed;
+            _characterController.Move(velocity * deltaTime);
+            _entityTransform.DORotate(
+                Vector3.up * additionalAngleLook * _lookXSensitivity * deltaTime + _entityTransform.eulerAngles,
+                deltaTime);
         }
     }
 }

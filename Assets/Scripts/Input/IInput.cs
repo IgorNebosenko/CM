@@ -4,7 +4,7 @@ namespace CM.Input
 {
     public interface IInput
     {
-        Vector3 MovementDirection { get; }
+        Vector2 MovementDirection { get; }
         
         void Init();
         void Update();

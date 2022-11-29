@@ -10,10 +10,10 @@ namespace CM.Input
         private bool _isMovementUpdate = true;
         private bool _isMovementViewUpdate = true;
 
-        private Vector3 _movementDirectionCached;
-        private Vector3 _movementViewDirectionCached;
+        private Vector2 _movementDirectionCached;
+        private Vector2 _movementViewDirectionCached;
         
-        public Vector3 MovementDirection { get; private set; }
+        public Vector2 MovementDirection { get; private set; }
         public float MovementViewDirectionX { get; private set; }
         public float MovementViewDirectionY { get; private set; }
 
@@ -34,8 +34,7 @@ namespace CM.Input
                 MovementDirection = _movementDirectionCached;
             else
             {
-                var direction = _gameControls.Player.Movement.ReadValue<Vector2>();
-                MovementDirection = Vector3.right * direction.x + Vector3.forward * direction.y;
+                MovementDirection = _gameControls.Player.Movement.ReadValue<Vector2>();
             }
 
             if (!_isMovementViewUpdate)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace CM.Entities.Motors
 {
@@ -18,11 +19,10 @@ namespace CM.Entities.Motors
 
         public void Simulate(float deltaTime, float additionalAngleLook)
         {
-            _camera.Rotate(Vector3.left * additionalAngleLook * _lookYSensitivity * deltaTime, Space.Self);
-
+            additionalAngleLook *= _lookYSensitivity * deltaTime;
             cameraRotation -= additionalAngleLook;
             cameraRotation = Mathf.Clamp(cameraRotation, -CameraAngleClamp, CameraAngleClamp);
-            _camera.localEulerAngles = new Vector3(cameraRotation, 0f, 0f);
+            _camera.DOLocalRotate(Vector3.right * cameraRotation, deltaTime);
         }
     }
 }
