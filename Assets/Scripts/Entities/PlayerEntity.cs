@@ -1,18 +1,18 @@
 ﻿using CM.Entities.Motors;
 using CM.Input;
+using CM.Input.Configs;
 using UnityEngine;
 
 namespace CM.Entities
 {
     public class PlayerEntity : MonoBehaviour, IEntity, IHavePosition
     {
-        [SerializeField] private float lookXSensitivity = 30;
-        [SerializeField] private float lookYSensitivity = 20;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera _camera;
 
         private PlayerInput _playerInput;
         private EntityData _entityData;
+        private InputConfig _inputConfig;
 
         private MovementMotor _movementMotor;
         private CameraMotor _cameraMotor;
@@ -28,13 +28,14 @@ namespace CM.Entities
             _cameraMotor.Simulate(deltaTime, _playerInput.MovementViewDirectionY);
         }
 
-        public void Init(EntityData data, IInput input)
+        public void Init(EntityData data, IInput input, InputConfig inputConfig)
         {
             _playerInput = (PlayerInput)input;
             _entityData = data;
+            _inputConfig = inputConfig;
 
-            _movementMotor = new MovementMotor(characterController, transform, _entityData, lookXSensitivity);
-            _cameraMotor = new CameraMotor(_camera.transform, lookYSensitivity);
+            _movementMotor = new MovementMotor(characterController, transform, _entityData, _inputConfig);
+            _cameraMotor = new CameraMotor(_camera.transform, _inputConfig);
         }
 
         public void DoDeath()

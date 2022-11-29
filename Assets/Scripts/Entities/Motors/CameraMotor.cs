@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using CM.Input.Configs;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CM.Entities.Motors
@@ -6,22 +7,22 @@ namespace CM.Entities.Motors
     public class CameraMotor
     {
         private Transform _camera;
-        private float _lookYSensitivity;
-
-        private const float CameraAngleClamp = 85f;
+        private InputConfig _inputConfig;
+        
         private float cameraRotation;
 
-        public CameraMotor(Transform camera, float lookYSensitivity)
+        public CameraMotor(Transform camera, InputConfig inputConfig)
         {
             _camera = camera;
-            _lookYSensitivity = lookYSensitivity;
+            _inputConfig = inputConfig;
         }
 
         public void Simulate(float deltaTime, float additionalAngleLook)
         {
-            additionalAngleLook *= _lookYSensitivity * deltaTime;
+            additionalAngleLook *= _inputConfig.lookYSensitivity * deltaTime;
             cameraRotation -= additionalAngleLook;
-            cameraRotation = Mathf.Clamp(cameraRotation, -CameraAngleClamp, CameraAngleClamp);
+            cameraRotation = Mathf.Clamp(cameraRotation, 
+                -_inputConfig.lookYAngleClamp, _inputConfig.lookYAngleClamp);
             _camera.DOLocalRotate(Vector3.right * cameraRotation, deltaTime);
         }
     }

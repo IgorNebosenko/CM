@@ -2807,6 +2807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentData: {fileID: 11400000, guid: 2f5093a9444d9fc4cb1132390020ba39, type: 2}
   entityConfig: {fileID: 11400000, guid: 101d9f095a7f6df48b97979110d71fc7, type: 2}
+  inputConfig: {fileID: 11400000, guid: a4518a01c995a1348a6d4b099e510a84, type: 2}
   mazeController: {fileID: 1538127487}
 --- !u!114 &1543764316
 MonoBehaviour:

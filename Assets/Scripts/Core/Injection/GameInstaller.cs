@@ -4,6 +4,7 @@ using CM.Core.Managers;
 using CM.Entities;
 using CM.Entities.Configs;
 using CM.Input;
+using CM.Input.Configs;
 using CM.Maze;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,7 @@ namespace CM.Core
     {
         [SerializeField] private MazeSegmentsConfig segmentData;
         [SerializeField] private EntityConfig entityConfig;
+        [SerializeField] private InputConfig inputConfig;
         [Space] 
         [SerializeField] private MazeController mazeController;
 
@@ -21,6 +23,7 @@ namespace CM.Core
         {
             Container.Bind<MazeSegmentsConfig>().FromInstance(segmentData).AsSingle(); //for different segments
             Container.Bind<EntityConfig>().FromInstance(entityConfig).AsSingle();
+            Container.Bind<InputConfig>().FromInstance(inputConfig).AsSingle();
 
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 

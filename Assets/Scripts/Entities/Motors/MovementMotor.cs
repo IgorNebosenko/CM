@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using CM.Input.Configs;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CM.Entities.Motors
@@ -8,15 +9,15 @@ namespace CM.Entities.Motors
         private CharacterController _characterController;
         private Transform _entityTransform;
         private EntityData _entityData;
-        private float _lookXSensitivity;
+        private InputConfig _inputConfig;
 
         public MovementMotor(CharacterController characterController, Transform entityTransform, 
-            EntityData entityData, float lookXSensitivity)
+            EntityData entityData, InputConfig inputConfig)
         {
             _characterController = characterController;
             _entityTransform = entityTransform;
             _entityData = entityData;
-            _lookXSensitivity = lookXSensitivity;
+            _inputConfig = inputConfig;
         }
 
         public void Simulate(float deltaTime, Vector2 inputDirection, float additionalAngleLook)
@@ -26,7 +27,7 @@ namespace CM.Entities.Motors
                            _entityData.speed;
             _characterController.Move(velocity * deltaTime);
             _entityTransform.DORotate(
-                Vector3.up * additionalAngleLook * _lookXSensitivity * deltaTime + _entityTransform.eulerAngles,
+                Vector3.up * additionalAngleLook * _inputConfig.lookXSensitivity * deltaTime + _entityTransform.eulerAngles,
                 deltaTime);
         }
     }
