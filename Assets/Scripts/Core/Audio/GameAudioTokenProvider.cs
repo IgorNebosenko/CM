@@ -11,7 +11,7 @@ namespace ElectrumGames.Core.Audio
 {
     public class GameAudioTokenProvider : IManager, IAudioTokenResourceProvider
     {
-        [Inject] 
+        [Inject(Id = "GameSoundFactory")] 
         private AudioToken.Factory _factory;
         
         private ConcurrentDictionary<string, Object> _cashedObjectsAsync =
@@ -73,7 +73,12 @@ namespace ElectrumGames.Core.Audio
 
             _loadingResourcesAsync.TryAdd(path);
 
-            var handle = Addressables.LoadAssetsAsync<T>(path);
+            var handle = Addressables.LoadAssetAsync<T>(path);
+            await handle.Task;
+            var result = handle.Result;
+            _cashedObjectsAsync.TryAdd(path, result);
+            _loadingResourcesAsync.TryTake(out var outs);
+            return result;
         }
     }
 }
