@@ -15,7 +15,7 @@ namespace ElectrumGames.Core.Audio
 
         private void Update()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             transform.name = audioSource.clip == null
                 ? "AudioSource"
                 : $"AudioSource {audioSource.clip.name}, mute:{audioSource.mute}, loop:{audioSource.loop}";

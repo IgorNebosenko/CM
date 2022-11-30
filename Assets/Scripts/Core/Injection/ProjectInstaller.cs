@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using CM.UI;
 using ElectrumGames.Core.Audio;
+using ElectrumGames.Core.Projectors;
 using ElectrumGames.MVP;
 using ElectrumGames.MVP.Managers;
 using ElectrumGames.MVP.Utils;
@@ -34,6 +35,12 @@ namespace CM.Core
                     .WithInitialSize(25)
                     .FromComponentInNewPrefabResource("Audio/AudioSource")
                     .UnderTransformGroup("AudioTokenSourcesPool"));
+
+            Container.BindFactory<ProjectorController, ProjectorController.Factory>()
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(25)
+                    .FromComponentInNewPrefabResource("Projectors/ProjectorSource")
+                    .UnderTransformGroup("ProjectorTokenSourcesPool"));
         }
 
 

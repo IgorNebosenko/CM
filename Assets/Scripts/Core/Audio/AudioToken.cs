@@ -98,7 +98,7 @@ namespace ElectrumGames.Core.Audio
             }
         }
         
-        public void ApplyAudioSourceSettings()
+        private void ApplyAudioSourceSettings()
         {
             _audioSourceController.Loop(_isLoop);
             _audioSourceController.Mute(_isMute);
