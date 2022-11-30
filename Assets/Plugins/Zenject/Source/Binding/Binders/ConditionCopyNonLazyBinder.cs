@@ -37,5 +37,11 @@ namespace Zenject
         {
             return When(r => r.ObjectType == null || !r.ObjectType.DerivesFromOrEqual(typeof(T)));
         }
+        
+        public CopyNonLazyBinder WhenInjectedIntoWithId<T>(object id)
+        {
+            return When(r => r.ObjectType != null && r.ObjectType.DerivesFromOrEqual(typeof(T)) && 
+                             r.ParentContexts.Where(x => Equals(x.Identifier, id)).Any());
+        }
     }
 }

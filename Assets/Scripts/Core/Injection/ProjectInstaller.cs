@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CM.UI;
+using ElectrumGames.Core.Audio;
 using ElectrumGames.MVP;
 using ElectrumGames.MVP.Managers;
 using ElectrumGames.MVP.Utils;
@@ -27,6 +28,12 @@ namespace CM.Core
             Container.Bind<PresenterFactory>().FromInstance(presenterFactory).AsSingle();
             Container.BindInstance(viewManager);
             Container.BindInstance(popupManager);
+
+            Container.BindFactory<AudioSourceController, AudioSourceController.Factory>()
+                .FromMonoPoolableMemoryPool(x => x
+                    .WithInitialSize(25)
+                    .FromComponentInNewPrefabResource("Audio/AudioSource")
+                    .UnderTransformGroup("AudioTokenSourcesPool"));
         }
 
 

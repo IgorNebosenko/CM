@@ -6,6 +6,7 @@ using CM.Entities.Configs;
 using CM.Input;
 using CM.Input.Configs;
 using CM.Maze;
+using ElectrumGames.Core.Audio;
 using UnityEngine;
 using Zenject;
 
@@ -34,6 +35,12 @@ namespace CM.Core
             
             BindManagerExplicit<GameManager>();
             BindManagerExplicit<MazeManager>();
+
+            Container.BindFactory<string, string, AudioToken, AudioToken.Factory>()
+                .WithId("GameSoundFactory").FromPoolableMemoryPool(x =>
+                    x.WithFixedSize(25));
+            Container.Bind<IAudioTokenResourceProvider>().To<GameAudioTokenProvider>().FromResolve()
+                .WhenInjectedIntoWithId<AudioToken.Factory>("GameSoundFactory");
 
             Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<MazeManager>();
         }
