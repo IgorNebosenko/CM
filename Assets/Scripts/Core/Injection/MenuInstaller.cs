@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using ElectrumGames.Core.Audio;
+using Zenject;
 
 namespace CM.Core
 {
@@ -6,7 +7,11 @@ namespace CM.Core
     {
         public override void InstallBindings()
         {
-            //Add what need for menu
+            Container.BindFactory<string, string, AudioToken, AudioToken.Factory>()
+                .WithId("MenuSoundFactory").FromPoolableMemoryPool(x =>
+                    x.WithFixedSize(10));
+            Container.Bind<IAudioTokenResourceProvider>().To<GameAudioTokenProvider>().FromResolve()
+                .WhenInjectedIntoWithId<AudioToken.Factory>("MenuSoundFactory");
         }
     }
 }

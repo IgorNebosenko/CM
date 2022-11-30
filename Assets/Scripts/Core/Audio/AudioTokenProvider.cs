@@ -9,10 +9,9 @@ using Zenject;
 
 namespace ElectrumGames.Core.Audio
 {
-    //For menu sfx
     public class AudioTokenProvider : IAudioTokenResourceProvider, IManager
     {
-        [Inject] 
+        [Inject(Id = "MenuSoundFactory")] 
         private AudioToken.Factory _factory;
         
         private ConcurrentDictionary<string, Object> _cashedObjectsAsync =
