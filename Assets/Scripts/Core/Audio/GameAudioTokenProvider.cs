@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CM.Core.Management;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -27,6 +28,12 @@ namespace ElectrumGames.Core.Audio
             if (!_tokens.Contains(token))
                 _tokens.Add(token);
             return token;
+        }
+
+        public AudioToken GetTokenFromGuid(string pathGuid, string presetGuid = null)
+        {
+            return GetToken(AssetDatabase.GUIDToAssetPath(pathGuid),
+                presetGuid == null ? "default" : AssetDatabase.GUIDToAssetPath(presetGuid));
         }
 
         public void Destroy()

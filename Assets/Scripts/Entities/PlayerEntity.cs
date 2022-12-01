@@ -1,4 +1,5 @@
-﻿using CM.Entities.Motors;
+﻿using System;
+using CM.Entities.Motors;
 using CM.Input;
 using CM.Input.Configs;
 using UnityEngine;
@@ -19,13 +20,20 @@ namespace CM.Entities
         
         public Vector3 Position => transform.position;
 
+        public event Action<float> StepIterate;
+
         private void Update()
         {
             var deltaTime = Time.deltaTime;
+
+            var cachedPosition = transform.position;
             
             _playerInput.Update();
             _movementMotor.Simulate(deltaTime, _playerInput.MovementDirection, _playerInput.MovementViewDirectionX);
             _cameraMotor.Simulate(deltaTime, _playerInput.MovementViewDirectionY);
+            
+            if (transform.position != cachedPosition)
+                StepIterate?.Invoke(deltaTime);
         }
 
         public void Init(EntityData data, IInput input, InputConfig inputConfig)
