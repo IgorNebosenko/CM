@@ -36,11 +36,6 @@ namespace CM.GameObjects.Dynamic
             }
         }
 
-        public void Destroy()
-        {
-            
-        }
-
         private void PlayFootstep()
         {
             var stepReference = GetRandomFootstepReference();

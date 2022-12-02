@@ -8,7 +8,5 @@ namespace CM.GameObjects.Visual
         void Init(DiContainer container, IHavePosition entityPosition);
 
         void OnIterateStep(float deltaTime);
-
-        void Destroy();
     }
 }
