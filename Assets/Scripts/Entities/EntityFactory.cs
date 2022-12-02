@@ -3,11 +3,13 @@ using CM.Entities.Configs;
 using CM.Input;
 using CM.Input.Configs;
 using UnityEngine;
+using Zenject;
 
 namespace CM.Entities
 {
     public class EntityFactory : IDisposable
     {
+        private DiContainer _container;
         private InputFactory _inputFactory;
         private EntityConfig _entityConfig;
         private InputConfig _inputConfig;
@@ -16,11 +18,12 @@ namespace CM.Entities
 
         private IHavePosition _playerPosition;
         
-        public EntityFactory(InputFactory inputFactory, EntityConfig entityConfig, InputConfig inputConfig)
+        public EntityFactory(DiContainer container)
         {
-            _inputFactory = inputFactory;
-            _entityConfig = entityConfig;
-            _inputConfig = inputConfig;
+            _container = container;
+            _inputFactory = _container.Resolve<InputFactory>();
+            _entityConfig = _container.Resolve<EntityConfig>();
+            _inputConfig = _container.Resolve<InputConfig>();
 
             _root = GameObject.Instantiate(new GameObject()).transform;
             _root.gameObject.name = "Entities";
@@ -32,7 +35,7 @@ namespace CM.Entities
             var playerData = _entityConfig.GetPlayerData();
             
             var entity = GameObject.Instantiate(playerData.playerEntity, startPosition, startRotation, _root);
-            entity.Init(playerData.data, _inputFactory.CreatePlayerInput(), _inputConfig);
+            entity.Init(_container, playerData.data, _inputFactory.CreatePlayerInput());
             _playerPosition = entity;
 
             return entity;
@@ -43,7 +46,7 @@ namespace CM.Entities
             var monsterData = _entityConfig.GetMonsterData();
 
             var entity = GameObject.Instantiate(monsterData.monsterEntity, startPosition, Quaternion.identity, _root);
-            entity.Init(monsterData.data, _inputFactory.CreateMonsterInput(_playerPosition), _inputConfig);
+            entity.Init(_container, monsterData.data, _inputFactory.CreateMonsterInput(_playerPosition));
 
             return entity;
         }

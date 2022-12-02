@@ -1,8 +1,11 @@
 ﻿using System;
 using CM.Entities.Motors;
+using CM.GameObjects.Dynamic;
+using CM.GameObjects.Visual;
 using CM.Input;
 using CM.Input.Configs;
 using UnityEngine;
+using Zenject;
 
 namespace CM.Entities
 {
@@ -11,16 +14,33 @@ namespace CM.Entities
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera _camera;
 
+        private DiContainer _container;
         private PlayerInput _playerInput;
         private EntityData _entityData;
         private InputConfig _inputConfig;
 
         private MovementMotor _movementMotor;
         private CameraMotor _cameraMotor;
-        
+
+        private IEntityVisual[] _entityVisuals;
+
         public Vector3 Position => transform.position;
 
         public event Action<float> StepIterate;
+
+        private void Awake()
+        {
+            _entityVisuals = new IEntityVisual[]
+            {
+                new PlayerSoundsHandler()
+            };
+        }
+
+        private void Start()
+        {
+            for (var i = 0; i < _entityVisuals.Length; i++)
+                _entityVisuals[i].Init(_container, this);
+        }
 
         private void Update()
         {
@@ -36,11 +56,12 @@ namespace CM.Entities
                 StepIterate?.Invoke(deltaTime);
         }
 
-        public void Init(EntityData data, IInput input, InputConfig inputConfig)
+        public void Init(DiContainer container, EntityData data, IInput input)
         {
+            _container = container;
             _playerInput = (PlayerInput)input;
             _entityData = data;
-            _inputConfig = inputConfig;
+            _inputConfig = container.Resolve<InputConfig>();
 
             _movementMotor = new MovementMotor(characterController, transform, _entityData, _inputConfig);
             _cameraMotor = new CameraMotor(_camera.transform, _inputConfig);

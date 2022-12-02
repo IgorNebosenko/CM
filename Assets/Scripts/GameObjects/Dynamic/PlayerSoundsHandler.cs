@@ -1,42 +1,31 @@
-﻿using System;
-using CM.Entities;
-using CM.GameObjects.Configs;
+﻿using CM.GameObjects.Configs;
+using CM.GameObjects.Visual;
+using CM.Input;
 using ElectrumGames.Core.Audio;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace CM.GameObjects.Dynamic
 {
-    public class PlayerSoundsHandler : MonoBehaviour
+    public class PlayerSoundsHandler : IEntityVisual
     {
-        [SerializeField] private PlayerEntity entity;
+        private IHavePosition _target;
 
         private SoundsConfig _soundsConfig;
         private GameAudioTokenProvider _audioTokenProvider;
         
         private float _timePassed;
-
-        [Inject]
-        private void Construct(SoundsConfig soundsConfig, GameAudioTokenProvider audioTokenProvider)
+        
+        public void Init(DiContainer container, IHavePosition target)
         {
-            _soundsConfig = soundsConfig;
-            _audioTokenProvider = audioTokenProvider;
+            _target = target;
+            
+            _soundsConfig = container.Resolve<SoundsConfig>();
+            _audioTokenProvider = container.Resolve<GameAudioTokenProvider>();
         }
 
-        private void OnEnable()
-        {
-            entity.StepIterate += OnStepIterate;
-        }
-
-        private void OnDisable()
-        {
-            entity.StepIterate -= OnStepIterate;
-        }
-
-        private void OnStepIterate(float deltaTime)
+        public void OnIterateStep(float deltaTime)
         {
             _timePassed += deltaTime;
 
@@ -47,6 +36,11 @@ namespace CM.GameObjects.Dynamic
             }
         }
 
+        public void Destroy()
+        {
+            
+        }
+
         private void PlayFootstep()
         {
             var stepReference = GetRandomFootstepReference();
@@ -54,7 +48,7 @@ namespace CM.GameObjects.Dynamic
             var token = _audioTokenProvider.GetTokenFromGuid(stepReference.AssetGUID,
                 _soundsConfig.playerFootstepsPreset.AssetGUID);
             
-            token.SetPosition(transform.position).Play();
+            token.SetPosition(_target.Position).Play();
         }
 
         private AssetReference GetRandomFootstepReference()
