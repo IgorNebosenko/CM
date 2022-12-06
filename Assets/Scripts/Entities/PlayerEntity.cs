@@ -1,5 +1,4 @@
-﻿using System;
-using CM.Entities.Motors;
+﻿using CM.Entities.Motors;
 using CM.GameObjects.Dynamic;
 using CM.GameObjects.Visual;
 using CM.Input;
@@ -26,8 +25,6 @@ namespace CM.Entities
 
         public Vector3 Position => transform.position;
 
-        public event Action<float> StepIterate;
-
         private void Awake()
         {
             _entityVisuals = new IEntityVisual[]
@@ -51,9 +48,12 @@ namespace CM.Entities
             _playerInput.Update();
             _movementMotor.Simulate(deltaTime, _playerInput.MovementDirection, _playerInput.MovementViewDirectionX);
             _cameraMotor.Simulate(deltaTime, _playerInput.MovementViewDirectionY);
-            
+
             if (transform.position != cachedPosition)
-                StepIterate?.Invoke(deltaTime);
+            {
+                for (var i = 0; i < _entityVisuals.Length; i++)
+                    _entityVisuals[i].OnIterateStep(deltaTime);
+            }
         }
 
         public void Init(DiContainer container, EntityData data, IInput input)

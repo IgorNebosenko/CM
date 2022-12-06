@@ -277,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 885230725662519777}
   - component: {fileID: 3177425900023538395}
-  - component: {fileID: -205291117048371269}
   - component: {fileID: 5704514653974142854}
   m_Layer: 0
   m_Name: PlayerEntity
@@ -317,19 +316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 5704514653974142854}
   _camera: {fileID: 7184678805427678177}
---- !u!114 &-205291117048371269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253260787251695362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed419dbf4f8248179729baa858de4802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 3177425900023538395}
 --- !u!143 &5704514653974142854
 CharacterController:
   m_ObjectHideFlags: 0

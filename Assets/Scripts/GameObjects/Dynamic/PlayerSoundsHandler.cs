@@ -40,8 +40,8 @@ namespace CM.GameObjects.Dynamic
         {
             var stepReference = GetRandomFootstepReference();
 
-            var token = _audioTokenProvider.GetTokenFromGuid(stepReference.AssetGUID,
-                _soundsConfig.playerFootstepsPreset.AssetGUID);
+            var token = _audioTokenProvider.GetToken((string)stepReference.RuntimeKey,
+                (string)_soundsConfig.playerFootstepsPreset.RuntimeKey);
             
             token.SetPosition(_target.Position).Play();
         }

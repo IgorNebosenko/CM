@@ -40,6 +40,7 @@ namespace CM.Core
             BindManagerExplicit<GameManager>();
             BindManagerExplicit<MazeManager>();
 
+            BindManagerExplicit<GameAudioTokenProvider>();
             Container.BindFactory<string, string, AudioToken, AudioToken.Factory>()
                 .WithId("GameSoundFactory").FromPoolableMemoryPool(x => x
                     .WithInitialSize(25));
