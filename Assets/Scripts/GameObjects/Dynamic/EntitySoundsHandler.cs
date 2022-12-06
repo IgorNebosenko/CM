@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CM.GameObjects.Dynamic
 {
-    public class PlayerSoundsHandler : IEntityVisual
+    public class EntitySoundsHandler : IEntityVisual
     {
         private IHavePosition _target;
 

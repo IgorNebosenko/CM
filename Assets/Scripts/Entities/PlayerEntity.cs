@@ -29,7 +29,7 @@ namespace CM.Entities
         {
             _entityVisuals = new IEntityVisual[]
             {
-                new PlayerSoundsHandler()
+                new EntitySoundsHandler()
             };
         }
 
