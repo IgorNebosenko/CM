@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 
 namespace ElectrumGames.Core.Projectors
 {
-    public class GameProjectileTokenProvider : IManager, IProjectorTokenResourceProvider
+    public class GameProjectorsTokenProvider : IManager, IProjectorTokenResourceProvider
     {
         private ProjectorToken.Factory _factory;
         

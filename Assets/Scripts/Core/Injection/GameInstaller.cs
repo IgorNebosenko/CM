@@ -47,10 +47,11 @@ namespace CM.Core
             Container.Bind<IAudioTokenResourceProvider>().To<GameAudioTokenProvider>().FromResolve()
                 .WhenInjectedIntoWithId<AudioToken.Factory>("GameSoundFactory");
 
+            BindManagerExplicit<GameProjectorsTokenProvider>();
             Container.BindFactory<string, Vector3, Quaternion, ProjectorToken, ProjectorToken.Factory>()
                 .FromPoolableMemoryPool(x => x
                     .WithInitialSize(25));
-            Container.Bind<IProjectorTokenResourceProvider>().To<GameProjectileTokenProvider>().FromResolve()
+            Container.Bind<IProjectorTokenResourceProvider>().To<GameProjectorsTokenProvider>().FromResolve()
                 .WhenInjectedInto<ProjectorToken.Factory>();
 
             Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<MazeManager>();
