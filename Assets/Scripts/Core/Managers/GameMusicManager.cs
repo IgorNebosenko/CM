@@ -13,6 +13,7 @@ namespace CM.Core.Managers
         private GameAudioTokenProvider _audioTokenProvider;
 
         private AudioToken _musicToken;
+        private AudioToken _roofLowLevelToken;
         
         public GameMusicManager(GameManager gameManager, SoundsConfig soundsConfig, 
             GameAudioTokenProvider audioTokenProvider)
@@ -21,6 +22,7 @@ namespace CM.Core.Managers
             _soundsConfig = soundsConfig;
             _audioTokenProvider = audioTokenProvider;
             
+            OnGameStarted();
             SubscribeEvents();
         }
         
@@ -47,33 +49,33 @@ namespace CM.Core.Managers
 
         private void OnGameStarted()
         {
-            PlayMusic(_soundsConfig.ambientMusic.RuntimeKey);
+            _musicToken = _audioTokenProvider.GetToken((string) _soundsConfig.ambientMusic.RuntimeKey, 
+                (string) _soundsConfig.globalAudioPreset.RuntimeKey);
+
+            _musicToken.SetPosition(Vector3.zero).Loop().Play();
         }
 
         private void OnLowRoofHeight()
         {
-            PlayMusic(_soundsConfig.lowRoofMusic);
+            _roofLowLevelToken = _audioTokenProvider.GetToken((string) _soundsConfig.lowRoofMusic.RuntimeKey, 
+                (string) _soundsConfig.globalAudioPreset.RuntimeKey);
+
+            _roofLowLevelToken.SetPosition(Vector3.zero).Loop().Play();
         }
 
         private void OnMonsterSeenPlayer()
         {
             var token = _audioTokenProvider.GetToken((string) _soundsConfig.monsterSeenPlayerEffect.RuntimeKey,
                 (string)_soundsConfig.globalAudioPreset.RuntimeKey);
+            
+            token.SetPosition(Vector3.zero).Play();
         }
 
         private void OnGameEnd(GameTerminationReason reason)
         {
             _musicToken?.Dispose();
+            _roofLowLevelToken?.Dispose();
         }
-
-        private void PlayMusic(object runtimeKey)
-        {
-            _musicToken?.Dispose();
-            
-            _musicToken = _audioTokenProvider
-                .GetToken((string) runtimeKey, (string) _soundsConfig.globalAudioPreset.RuntimeKey);
-
-            _musicToken.SetPosition(Vector3.zero).Loop().Play();
-        }
+        
     }
 }

@@ -12,6 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf338031b6ec46e0b9ba7dce2c753934, type: 3}
   m_Name: SoundsConfig
   m_EditorClassIdentifier: 
+  globalAudioPreset:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  ambientMusic:
+    m_AssetGUID: bb4aa3033e5a3384eb1a4015b9be16cb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  lowRoofMusic:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  monsterSeenPlayerEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   playerFootstepsPreset:
     m_AssetGUID: 51913aecb5c3d544eb99ff6095c13b54
     m_SubObjectName: 
