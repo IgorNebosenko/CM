@@ -1,3 +1,4 @@
+using CM.Core.Configs;
 using CM.Maze.Configs;
 using CM.Core.Management;
 using CM.Core.Managers;
@@ -20,6 +21,7 @@ namespace CM.Core
         [SerializeField] private EntityConfig entityConfig;
         [SerializeField] private InputConfig inputConfig;
         [SerializeField] private SoundsConfig soundsConfig;
+        [SerializeField] private GameConfig gameConfig;
         [Space] 
         [SerializeField] private MazeController mazeController;
 
@@ -29,6 +31,7 @@ namespace CM.Core
             Container.Bind<EntityConfig>().FromInstance(entityConfig).AsSingle();
             Container.Bind<InputConfig>().FromInstance(inputConfig).AsSingle();
             Container.Bind<SoundsConfig>().FromInstance(soundsConfig).AsSingle();
+            Container.Bind<GameConfig>().FromInstance(gameConfig).AsSingle();
 
             Container.Bind(typeof(IManagerProvider), typeof(IManagersRunner)).To<ManagersRunner>().AsSingle();
 
@@ -54,7 +57,7 @@ namespace CM.Core
             Container.Bind<IProjectorTokenResourceProvider>().To<GameProjectorsTokenProvider>().FromResolve()
                 .WhenInjectedInto<ProjectorToken.Factory>();
 
-            Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<MazeManager>();
+            Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<IManager>();
         }
 
 

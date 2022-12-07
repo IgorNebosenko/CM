@@ -30,11 +30,11 @@ namespace CM.Entities
             _root.position = Vector3.zero;
         }
 
-        public PlayerEntity GetPlayerEntity(Vector3 startPosition, Quaternion startRotation)
+        public PlayerEntity GetPlayerEntity(Vector3 startPosition, Quaternion rotation)
         {
             var playerData = _entityConfig.GetPlayerData();
             
-            var entity = GameObject.Instantiate(playerData.playerEntity, startPosition, startRotation, _root);
+            var entity = GameObject.Instantiate(playerData.playerEntity, startPosition, rotation, _root);
             entity.Init(_container, playerData.data, _inputFactory.CreatePlayerInput());
             _playerPosition = entity;
 

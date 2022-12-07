@@ -2701,7 +2701,7 @@ MonoBehaviour:
   - {fileID: 1576740264}
   playerSpawn: {fileID: 2139402334}
   mazeFinish: {fileID: 1587371811}
-  roof: {fileID: 344330442}
+  _roof: {fileID: 344330442}
 --- !u!1001 &1542518468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2809,6 +2809,7 @@ MonoBehaviour:
   entityConfig: {fileID: 11400000, guid: 101d9f095a7f6df48b97979110d71fc7, type: 2}
   inputConfig: {fileID: 11400000, guid: a4518a01c995a1348a6d4b099e510a84, type: 2}
   soundsConfig: {fileID: 11400000, guid: 76abb2eef34bbfe469eb8e39fe947183, type: 2}
+  gameConfig: {fileID: 11400000, guid: d2acefb77f18a144fb56b29b6097e062, type: 2}
   mazeController: {fileID: 1538127487}
 --- !u!114 &1543764316
 MonoBehaviour:

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CM.Maze.Configs;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -11,14 +12,31 @@ namespace CM.Maze
         [SerializeField] private MazeFragment playerSpawn;
         [SerializeField] private MazeFragment mazeFinish;
 
-        [SerializeField] private Transform roof;
+        [SerializeField] private Transform _roof;
         
         private MazeSegmentsConfig _segmentsConfig;
-        
+
+        private const float EndRoofHeight = 1.5f;
+        private const float DangerousRoofHeight = 3f;
+        private float _startRoofHeight;
+
+        public bool IsRoofHeightDangerous => _roof.transform.position.y < DangerousRoofHeight;
+
+        private void Awake()
+        {
+            _startRoofHeight = _roof.position.y;
+        }
+
         [Inject]
         private void Construct(MazeSegmentsConfig segmentsConfig)
         {
             _segmentsConfig = segmentsConfig;
+        }
+
+        public void DoMoveRoof(float perSecond, float deltaTime)
+        {
+            var targetHeight = _roof.position.y - deltaTime * perSecond;
+            _roof.DOMoveY(targetHeight, deltaTime);
         }
 
         public Vector3 GetPlayerSpawnPoint()
@@ -40,6 +58,16 @@ namespace CM.Maze
             var spawnPoint =  listTransforms[Random.Range(0, listTransforms.Count)].position;
             spawnPoint.y = 0;
             return spawnPoint;
+        }
+
+        public void ResetController()
+        {
+            var roofTransform = _roof.transform;
+            var position = roofTransform.position;
+            position += Vector3.up * (_startRoofHeight - position.y);
+            roofTransform.position = position;
+            
+            
         }
     }
 }

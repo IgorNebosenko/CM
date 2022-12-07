@@ -18,7 +18,12 @@ MonoBehaviour:
   m_GUID: f78e82184e1b3e24f971e71157928bb8
   m_SerializeEntries:
   - m_GUID: d21889c1e176e264ea38dc71dfa1727b
-    m_Address: audio/defaultaudiopreset
+    m_Address: presets/default_audio
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - preset
+  - m_GUID: 51913aecb5c3d544eb99ff6095c13b54
+    m_Address: presets/player_slap_sound
     m_ReadOnly: 0
     m_SerializedLabels:
     - preset
