@@ -16,11 +16,12 @@ namespace CM.Maze
         
         private MazeSegmentsConfig _segmentsConfig;
 
-        private const float EndRoofHeight = 1.5f;
+        private const float EndRoofHeight = 1.6f;
         private const float DangerousRoofHeight = 3f;
         private float _startRoofHeight;
 
         public bool IsRoofHeightDangerous => _roof.transform.position.y < DangerousRoofHeight;
+        public bool IsRoofLessMinimalLevel => _roof.transform.position.y < EndRoofHeight;
 
         private void Awake()
         {

@@ -42,6 +42,7 @@ namespace CM.Core
             
             BindManagerExplicit<GameManager>();
             BindManagerExplicit<MazeManager>();
+            BindManagerExplicit<GameMusicManager>();
 
             BindManagerExplicit<GameAudioTokenProvider>();
             Container.BindFactory<string, string, AudioToken, AudioToken.Factory>()

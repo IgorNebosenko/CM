@@ -24,7 +24,7 @@ namespace CM.Core.Managers
             _mazeController = mazeController;
             _entityFactory = entityFactory;
             
-            StartGame();
+            OnGameStart();
         }
 
         public void Simulate(float deltaTime)
@@ -37,7 +37,7 @@ namespace CM.Core.Managers
             throw new NotImplementedException();
         }
 
-        private void StartGame()
+        public void OnGameStart()
         {
             GameStarted?.Invoke();
             GameTimePassed = 0f;
@@ -46,7 +46,17 @@ namespace CM.Core.Managers
             //_entityFactory.GetMonsterEntity(_mazeController.GetMonsterSpawnPoint());
         }
 
-        public void GameEnd(GameTerminationReason reason)
+        public void OnLowRoofHeight()
+        {
+            LowRoofHeight?.Invoke();
+        }
+
+        public void OnMonsterSeePlayer()
+        {
+            MonsterSeenPlayer?.Invoke();
+        }
+
+        public void OnGameEnd(GameTerminationReason reason)
         {
             GameEnded?.Invoke(reason);
         }
