@@ -31,15 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "22146c01-67e6-4f82-a621-61a1f6ee0e0a",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -221,6 +212,17 @@
                 },
                 {
                     "name": "",
+                    "id": "87946935-92b2-423e-becd-17dccd184593",
+                    "path": "<Touchscreen>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6bc03a7a-bba3-46ff-bed5-7e1a52757113",
                     "path": "<Mouse>/delta/y",
                     "interactions": "",
@@ -231,59 +233,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "JoystickLook",
-                    "id": "0863284d-6583-4990-8f28-018a191ba17d",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "01efc19c-d68a-4c89-8bc1-52de994a6dae",
+                    "path": "<Touchscreen>/primaryTouch/delta/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
-                    "isComposite": true,
+                    "action": "LookY",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "e383610f-a2ad-4139-b84f-fac26451d423",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "60a4c786-b7cc-43e5-81ef-4d4ab1a46bcc",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "302d717c-2784-4669-9409-f4d4980604d0",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "eee7c770-0f56-4554-baf4-86757fde5df9",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }

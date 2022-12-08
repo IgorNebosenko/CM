@@ -55,15 +55,6 @@ namespace CM.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""22146c01-67e6-4f82-a621-61a1f6ee0e0a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -245,6 +236,17 @@ namespace CM.Input
                 },
                 {
                     ""name"": """",
+                    ""id"": ""87946935-92b2-423e-becd-17dccd184593"",
+                    ""path"": ""<Touchscreen>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6bc03a7a-bba3-46ff-bed5-7e1a52757113"",
                     ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
@@ -255,59 +257,15 @@ namespace CM.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""JoystickLook"",
-                    ""id"": ""0863284d-6583-4990-8f28-018a191ba17d"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""01efc19c-d68a-4c89-8bc1-52de994a6dae"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": true,
+                    ""action"": ""LookY"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""e383610f-a2ad-4139-b84f-fac26451d423"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""60a4c786-b7cc-43e5-81ef-4d4ab1a46bcc"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""302d717c-2784-4669-9409-f4d4980604d0"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""eee7c770-0f56-4554-baf4-86757fde5df9"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -336,7 +294,6 @@ namespace CM.Input
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_LookX = m_Player.FindAction("LookX", throwIfNotFound: true);
             m_Player_LookY = m_Player.FindAction("LookY", throwIfNotFound: true);
-            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -399,7 +356,6 @@ namespace CM.Input
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_LookX;
         private readonly InputAction m_Player_LookY;
-        private readonly InputAction m_Player_Look;
         public struct PlayerActions
         {
             private @GameControls m_Wrapper;
@@ -407,7 +363,6 @@ namespace CM.Input
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @LookX => m_Wrapper.m_Player_LookX;
             public InputAction @LookY => m_Wrapper.m_Player_LookY;
-            public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -426,9 +381,6 @@ namespace CM.Input
                     @LookY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
                     @LookY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
                     @LookY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
-                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -442,9 +394,6 @@ namespace CM.Input
                     @LookY.started += instance.OnLookY;
                     @LookY.performed += instance.OnLookY;
                     @LookY.canceled += instance.OnLookY;
-                    @Look.started += instance.OnLook;
-                    @Look.performed += instance.OnLook;
-                    @Look.canceled += instance.OnLook;
                 }
             }
         }
@@ -463,7 +412,6 @@ namespace CM.Input
             void OnMovement(InputAction.CallbackContext context);
             void OnLookX(InputAction.CallbackContext context);
             void OnLookY(InputAction.CallbackContext context);
-            void OnLook(InputAction.CallbackContext context);
         }
     }
 }

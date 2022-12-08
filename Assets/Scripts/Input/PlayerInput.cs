@@ -37,7 +37,7 @@ namespace CM.Input
                 MovementDirection = _gameControls.Player.Movement.ReadValue<Vector2>();
             }
 
-            if (!_isMovementViewUpdate)
+            if (!_isMovementViewUpdate || MovementDirection != Vector2.zero)
             {
                 MovementViewDirectionX = _movementViewDirectionCached.x;
                 MovementViewDirectionY = _movementViewDirectionCached.y;
