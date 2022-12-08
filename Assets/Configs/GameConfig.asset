@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1086d03090a940a38a2462696ea397c2, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  speedRoofDecreaseInSecond: 0.1
-  frequencyPlayerSteps: 0.6
+  speedRoofDecreaseInSecond: 0.0271
+  timeMonsterFollowPlayer: 3
+  timeBeforeDeath: 2.5

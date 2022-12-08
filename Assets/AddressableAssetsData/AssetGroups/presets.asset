@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - preset
+  - m_GUID: 19df2bdcdbbe89241b72f1d1055f0026
+    m_Address: presets/music
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - preset
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 48ce868c907184448b52a4d8674ba1b6, type: 2}
   m_SchemaSet:

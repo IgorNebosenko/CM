@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SoundsConfig
   m_EditorClassIdentifier: 
   globalAudioPreset:
-    m_AssetGUID: 
+    m_AssetGUID: 19df2bdcdbbe89241b72f1d1055f0026
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   lowRoofMusic:
-    m_AssetGUID: 
+    m_AssetGUID: 9349012a960d68e4ea5380b3a47705c7
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

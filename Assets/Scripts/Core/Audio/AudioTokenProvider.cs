@@ -11,9 +11,6 @@ namespace ElectrumGames.Core.Audio
 {
     public class AudioTokenProvider : IAudioTokenResourceProvider, IManager
     {
-        [Inject(Id = "MenuSoundFactory")] 
-        private AudioToken.Factory _factory;
-        
         private ConcurrentDictionary<string, Object> _cashedObjectsAsync =
             new ConcurrentDictionary<string, Object>();
         private BlockingCollection<string> _loadingResourcesAsync =
@@ -54,7 +51,6 @@ namespace ElectrumGames.Core.Audio
             _tokens.Clear();
             
             _cashedObjectsAsync.Clear();
-            _factory = null;
         }
     }
 }

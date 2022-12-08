@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 7adff0568e23aaf4aa98379b07ca432d
-  m_SerializeEntries:
-  - m_GUID: 9349012a960d68e4ea5380b3a47705c7
-    m_Address: fx_sounds/low_roof_level
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - audio
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 48ce868c907184448b52a4d8674ba1b6, type: 2}
   m_SchemaSet:
