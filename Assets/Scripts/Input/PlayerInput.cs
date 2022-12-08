@@ -74,5 +74,10 @@ namespace CM.Input
         {
             _isMovementViewUpdate = true;
         }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            _isMovementViewUpdate = true;
+        }
     }
 }

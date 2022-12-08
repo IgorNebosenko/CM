@@ -55,6 +55,15 @@ namespace CM.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""22146c01-67e6-4f82-a621-61a1f6ee0e0a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -72,7 +81,7 @@ namespace CM.Input
                 {
                     ""name"": ""up"",
                     ""id"": ""cc1b10fd-2243-4db1-8f92-b530a46319a2"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""All"",
@@ -83,7 +92,7 @@ namespace CM.Input
                 {
                     ""name"": ""down"",
                     ""id"": ""0104c941-ab21-4485-a475-7ed523108229"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/rightStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""All"",
@@ -94,7 +103,7 @@ namespace CM.Input
                 {
                     ""name"": ""left"",
                     ""id"": ""7c77a21b-8108-42f6-8ecc-01b8bb0c0dfe"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""All"",
@@ -105,7 +114,7 @@ namespace CM.Input
                 {
                     ""name"": ""right"",
                     ""id"": ""a793a9e5-fb31-4c0c-b57b-1dfa1be1574b"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""All"",
@@ -244,6 +253,61 @@ namespace CM.Input
                     ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""JoystickLook"",
+                    ""id"": ""0863284d-6583-4990-8f28-018a191ba17d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e383610f-a2ad-4139-b84f-fac26451d423"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""60a4c786-b7cc-43e5-81ef-4d4ab1a46bcc"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""302d717c-2784-4669-9409-f4d4980604d0"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""eee7c770-0f56-4554-baf4-86757fde5df9"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -272,6 +336,7 @@ namespace CM.Input
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_LookX = m_Player.FindAction("LookX", throwIfNotFound: true);
             m_Player_LookY = m_Player.FindAction("LookY", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -334,6 +399,7 @@ namespace CM.Input
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_LookX;
         private readonly InputAction m_Player_LookY;
+        private readonly InputAction m_Player_Look;
         public struct PlayerActions
         {
             private @GameControls m_Wrapper;
@@ -341,6 +407,7 @@ namespace CM.Input
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @LookX => m_Wrapper.m_Player_LookX;
             public InputAction @LookY => m_Wrapper.m_Player_LookY;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -359,6 +426,9 @@ namespace CM.Input
                     @LookY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
                     @LookY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
                     @LookY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookY;
+                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -372,6 +442,9 @@ namespace CM.Input
                     @LookY.started += instance.OnLookY;
                     @LookY.performed += instance.OnLookY;
                     @LookY.canceled += instance.OnLookY;
+                    @Look.started += instance.OnLook;
+                    @Look.performed += instance.OnLook;
+                    @Look.canceled += instance.OnLook;
                 }
             }
         }
@@ -390,6 +463,7 @@ namespace CM.Input
             void OnMovement(InputAction.CallbackContext context);
             void OnLookX(InputAction.CallbackContext context);
             void OnLookY(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
         }
     }
 }
