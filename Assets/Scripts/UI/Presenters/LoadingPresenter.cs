@@ -1,7 +1,7 @@
-﻿using CM.UI.UI.Views;
+﻿using CM.UI.Views;
 using ElectrumGames.MVP;
 
-namespace CM.UI.UI.Presenters
+namespace CM.UI.Presenters
 {
     public class LoadingPresenter : Presenter<LoadingView>
     {

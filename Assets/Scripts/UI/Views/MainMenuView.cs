@@ -1,10 +1,9 @@
-using System;
-using CM.UI.UI.Presenters;
+using CM.UI.Presenters;
 using ElectrumGames.MVP;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CM.UI
+namespace CM.UI.Views
 {
     [AutoRegisterView]
     public class MainMenuView : View<MainMenuPresenter>

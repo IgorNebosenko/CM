@@ -1,5 +1,5 @@
 using System.Collections;
-using CM.UI.UI.Presenters;
+using CM.UI.Presenters;
 using ElectrumGames.MVP.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;

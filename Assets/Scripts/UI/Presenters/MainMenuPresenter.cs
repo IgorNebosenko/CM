@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using CM.UI.Views;
 using ElectrumGames.MVP;
 using UnityEngine.SceneManagement;
 
-namespace CM.UI.UI.Presenters
+namespace CM.UI.Presenters
 {
     public class MainMenuPresenter : Presenter<MainMenuView>
     {
@@ -15,7 +16,6 @@ namespace CM.UI.UI.Presenters
         public IEnumerator ButtonPlayPressedProcess()
         {
             yield return SceneManager.LoadSceneAsync(GameSceneId);
-            Close();
         }
     }
 }

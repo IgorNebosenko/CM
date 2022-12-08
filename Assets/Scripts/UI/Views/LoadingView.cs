@@ -1,7 +1,7 @@
-﻿using CM.UI.UI.Presenters;
+﻿using CM.UI.Presenters;
 using ElectrumGames.MVP;
 
-namespace CM.UI.UI.Views
+namespace CM.UI.Views
 {
     [AutoRegisterView]
     public class LoadingView : View<LoadingPresenter>

@@ -1,11 +1,11 @@
-using CM.UI.Presenters;
+﻿using CM.UI.Presenters;
 using ElectrumGames.MVP.Managers;
 using UnityEngine;
 using Zenject;
 
 namespace CM.Core
 {
-    public class MenuFlow : MonoBehaviour
+    public class GameFlow : MonoBehaviour
     {
         private ViewManager _viewManager;
         
@@ -17,8 +17,7 @@ namespace CM.Core
 
         private void Awake()
         {
-            _viewManager.CloseRootView();
-            _viewManager.ShowView<MainMenuPresenter>();
+            _viewManager.ShowView<GameViewPresenter>();
         }
     }
 }
