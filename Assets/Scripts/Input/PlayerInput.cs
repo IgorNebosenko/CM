@@ -13,7 +13,6 @@ namespace CM.Input
 
         private bool _isMovementUpdate = true;
         private bool _isMovementViewUpdate = true;
-        private bool _isTouchUpdated = true;
 
         private Vector2 _movementDirectionCached;
         private Vector2 _movementViewDirectionCached;
