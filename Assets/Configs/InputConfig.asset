@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668b5b5dbe284ec6888e15a13625e449, type: 3}
   m_Name: InputConfig
   m_EditorClassIdentifier: 
-  lookXSensitivity: 3
-  lookYSensitivity: 3
+  lookXSensitivity: 6
+  lookYSensitivity: 6
   lookYAngleClamp: 85

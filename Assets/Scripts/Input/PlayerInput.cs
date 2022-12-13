@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+#if !UNITY_EDITOR && UNITY_ANDROID
+using UnityEngine.EventSystems;
+#endif
+
 namespace CM.Input
 {
     public class PlayerInput : IInput, GameControls.IPlayerActions
@@ -9,6 +13,7 @@ namespace CM.Input
 
         private bool _isMovementUpdate = true;
         private bool _isMovementViewUpdate = true;
+        private bool _isTouchUpdated = true;
 
         private Vector2 _movementDirectionCached;
         private Vector2 _movementViewDirectionCached;
@@ -37,20 +42,53 @@ namespace CM.Input
                 MovementDirection = _gameControls.Player.Movement.ReadValue<Vector2>();
             }
 
-            if (!_isMovementViewUpdate || MovementDirection != Vector2.zero)
+            MovementViewDirectionX = _movementViewDirectionCached.x;
+            MovementViewDirectionY = _movementViewDirectionCached.y;
+            
+#if UNITY_EDITOR
+            if (!_isMovementViewUpdate) 
+                return;
+            
+            var direction = new Vector2(
+                _gameControls.Player.LookX.ReadValue<float>(),
+                _gameControls.Player.LookY.ReadValue<float>());
+            
+            MovementViewDirectionX = direction.x; 
+            MovementViewDirectionY = direction.y;
+#elif UNITY_ANDROID
+
+            var eventSystem = EventSystem.current;
+            var touches = Touchscreen.current.touches;
+            
+            if (eventSystem.IsPointerOverGameObject(touches[0].touchId.ReadValue()))
             {
-                MovementViewDirectionX = _movementViewDirectionCached.x;
-                MovementViewDirectionY = _movementViewDirectionCached.y;
+                if (touches.Count > 1 && touches[1].isInProgress)
+                {
+                    if (eventSystem.IsPointerOverGameObject(touches[1].touchId.ReadValue()))
+                        return;
+
+                    var  touchDeltaPosition = Touchscreen.current.touches[1].delta.ReadValue();
+                    
+                    MovementViewDirectionX = touchDeltaPosition.x;
+                    MovementViewDirectionY = touchDeltaPosition.y;
+                }
             }
             else
             {
-                var direction = new Vector2(
-                    _gameControls.Player.LookX.ReadValue<float>(),
-                    _gameControls.Player.LookY.ReadValue<float>());
+                if (touches.Count > 0 && touches[0].isInProgress)
+                {
+                    if (eventSystem.IsPointerOverGameObject(touches[0].touchId.ReadValue()))
+                        return;
+                    
 
-                MovementViewDirectionX = direction.x; 
-                MovementViewDirectionY = direction.y;
+                    var touchDeltaPosition = touches[0].delta.ReadValue();
+                    
+                    MovementViewDirectionX = touchDeltaPosition.x;
+                    MovementViewDirectionY = touchDeltaPosition.y;
+                }
+
             }
+#endif
         }
 
         public void ResetInput()
@@ -67,15 +105,16 @@ namespace CM.Input
 
         public void OnLookX(InputAction.CallbackContext context)
         {
-            _isMovementViewUpdate = true;
+            
+            OnLook(context);
         }
 
         public void OnLookY(InputAction.CallbackContext context)
         {
-            _isMovementViewUpdate = true;
+            OnLook(context);
         }
 
-        public void OnLook(InputAction.CallbackContext context)
+        private void OnLook(InputAction.CallbackContext context)
         {
             _isMovementViewUpdate = true;
         }

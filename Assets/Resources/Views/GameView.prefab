@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 5038766836088272897}
-  hideOnDesktop: {fileID: 0}
+  hideOnDesktop: {fileID: 4476576405622062559}
 --- !u!1 &2535207673509240779
 GameObject:
   m_ObjectHideFlags: 0
