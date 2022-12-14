@@ -10,5 +10,14 @@ namespace CM.UI.Views
     {
         [SerializeField] private Image deathEffect;
         [SerializeField] private GameObject hideOnDesktop;
+
+        private void Awake()
+        {
+            #if UNITY_EDITOR
+            hideOnDesktop.SetActive(false);
+            #elif UNITY_ANDROID
+            hideOnDesktop.SetActive(true);
+            #endif
+        }
     }
 }
