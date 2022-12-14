@@ -46,8 +46,7 @@ namespace CM.Entities
             var monsterData = _entityConfig.GetMonsterData();
 
             var entity = GameObject.Instantiate(monsterData.monsterEntity, startPosition, Quaternion.identity, _root);
-            entity.Init(_container, monsterData.data, _inputFactory.CreateMonsterInput(_playerPosition));
-            entity.SetTarget(_playerPosition);
+            entity.Init(_container, monsterData.data, _inputFactory.CreateMonsterInput(_playerPosition, _inputConfig, entity.transform));
 
             return entity;
         }

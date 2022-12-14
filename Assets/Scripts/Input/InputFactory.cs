@@ -1,4 +1,6 @@
 ﻿using System;
+using CM.Input.Configs;
+using UnityEngine;
 
 namespace CM.Input
 {
@@ -18,9 +20,11 @@ namespace CM.Input
             return input;
         }
 
-        public MonsterInput CreateMonsterInput(IHavePosition playerPosition)
+        public MonsterInput CreateMonsterInput(IHavePosition playerPosition, InputConfig config, Transform entityTransform)
         {
-            throw new NotImplementedException();
+            var input = new MonsterInput(playerPosition, config, entityTransform);
+            input.Init();
+            return input;
         }
     }
 }

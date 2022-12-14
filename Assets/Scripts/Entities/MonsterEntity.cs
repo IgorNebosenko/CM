@@ -10,7 +10,6 @@ namespace CM.Entities
     {
         [SerializeField] private CharacterController characterController;
         
-        private IHavePosition _target;
         private DiContainer _container;
         private EntityData _entityData;
         private IInput _monsterInput;
@@ -37,11 +36,6 @@ namespace CM.Entities
         public void DoDeath()
         {
             throw new System.NotImplementedException();
-        }
-
-        public void SetTarget(IHavePosition target)
-        {
-            _target = target;
         }
 
         public void Dispose()
