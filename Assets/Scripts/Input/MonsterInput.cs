@@ -4,6 +4,8 @@ namespace CM.Input
 {
     public class MonsterInput : IInput
     {
+        private MonsterInputState _inputState;
+        
         public Vector2 MovementDirection { get; private set; }
 
         public void Init()

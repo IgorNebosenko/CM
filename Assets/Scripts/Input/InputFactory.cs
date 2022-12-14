@@ -18,7 +18,7 @@ namespace CM.Input
             return input;
         }
 
-        public IInput CreateMonsterInput(IHavePosition playerPosition)
+        public MonsterInput CreateMonsterInput(IHavePosition playerPosition)
         {
             throw new NotImplementedException();
         }
