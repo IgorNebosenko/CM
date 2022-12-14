@@ -43,7 +43,7 @@ namespace CM.Core.Managers
             GameTimePassed = 0f;
 
             _entityFactory.GetPlayerEntity(_mazeController.GetPlayerSpawnPoint(), Quaternion.identity);
-            //_entityFactory.GetMonsterEntity(_mazeController.GetMonsterSpawnPoint());
+            _entityFactory.GetMonsterEntity(_mazeController.GetMonsterSpawnPoint());
         }
 
         public void OnLowRoofHeight()

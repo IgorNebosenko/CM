@@ -9,10 +9,16 @@ namespace CM.GameObjects.Configs
         public AssetReference globalAudioPreset;
         public AssetReference ambientMusic;
         public AssetReference lowRoofMusic;
-        public AssetReference monsterSeenPlayerEffect;
         [Space]
-        public AssetReference playerFootstepsPreset;
+        public AssetReference entityFootstepsPreset;
+        [Space]
         public AssetReference[] playerFootstepsSounds;
         public float playerFootstepDuration = 0.6f;
+        [Space]
+        public AssetReference monsterSeenPlayerEffect;
+        public AssetReference[] monsterFootstepsSounds;
+        public float monsterWalkFootstepDuration = 0.75f;
+        public float monsterRunFootstepDuration = 0.4f;
+
     }
 }

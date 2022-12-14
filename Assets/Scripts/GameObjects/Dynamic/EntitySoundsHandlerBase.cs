@@ -8,20 +8,22 @@ using Zenject;
 
 namespace CM.GameObjects.Dynamic
 {
-    public class EntitySoundsHandler : IEntityVisual
+    public abstract class EntitySoundsHandlerBase : IEntityVisual
     {
         private IHavePosition _target;
-
-        private SoundsConfig _soundsConfig;
-        private GameAudioTokenProvider _audioTokenProvider;
         
+        private GameAudioTokenProvider _audioTokenProvider;
+        protected SoundsConfig soundsConfig;
+
         private float _timePassed;
+
+        protected abstract float FootstepDuration { get; }
         
         public void Init(DiContainer container, IHavePosition target)
         {
             _target = target;
             
-            _soundsConfig = container.Resolve<SoundsConfig>();
+            soundsConfig = container.Resolve<SoundsConfig>();
             _audioTokenProvider = container.Resolve<GameAudioTokenProvider>();
         }
 
@@ -29,7 +31,7 @@ namespace CM.GameObjects.Dynamic
         {
             _timePassed += deltaTime;
 
-            if (_timePassed > _soundsConfig.playerFootstepDuration)
+            if (_timePassed > FootstepDuration)
             {
                 _timePassed = 0f;
                 PlayFootstep();
@@ -41,20 +43,11 @@ namespace CM.GameObjects.Dynamic
             var stepReference = GetRandomFootstepReference();
 
             var token = _audioTokenProvider.GetToken((string)stepReference.RuntimeKey,
-                (string)_soundsConfig.playerFootstepsPreset.RuntimeKey);
+                (string)soundsConfig.entityFootstepsPreset.RuntimeKey);
             
             token.SetPosition(_target.Position).Play();
         }
 
-        private AssetReference GetRandomFootstepReference()
-        {
-            if (_soundsConfig.playerFootstepsSounds == null || _soundsConfig.playerFootstepsSounds.Length == 0)
-            {
-                Debug.Log($"[{GetType().Name}] footstep list is empty!");
-                return null;
-            }
-
-            return _soundsConfig.playerFootstepsSounds[Random.Range(0, _soundsConfig.playerFootstepsSounds.Length)];
-        }
+        protected abstract AssetReference GetRandomFootstepReference();
     }
 }

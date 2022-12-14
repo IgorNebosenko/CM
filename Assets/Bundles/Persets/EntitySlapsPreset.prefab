@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 870371937495245116}
   - component: {fileID: 4790830394420083067}
   m_Layer: 0
-  m_Name: PlayerSlapsPreset
+  m_Name: EntitySlapsPreset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
