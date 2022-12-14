@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CM.RaycastResolver
@@ -17,7 +18,7 @@ namespace CM.RaycastResolver
             _transform = transform;
         }
 
-        public MovementResolverDirections GetAvailableDirections()
+        public List<MovementResolverDirections> GetAvailableDirections()
         {
             var forward = _transform.forward;
             var right = _transform.right;
@@ -30,19 +31,15 @@ namespace CM.RaycastResolver
                 (MovementResolverDirections.Left, GetDistance(right * -1f))
             };
             
-            var hasAvailableDirection = false;
-            var result = MovementResolverDirections.None;
+            var result = new List<MovementResolverDirections>();
 
             for (var i = 0; i < distances.Length; i++)
             {
-                if (!(Math.Abs(distances[i].distance - FreeDirectionFlag) < ToleranceDifference)) 
-                    continue;
-                
-                hasAvailableDirection = true;
-                result += (int)distances[i].direction;
+                if (Math.Abs(distances[i].distance - FreeDirectionFlag) < ToleranceDifference)
+                    result.Add(distances[i].direction);
             }
 
-            if (hasAvailableDirection)
+            if (result.Count != 0)
                 return result;
 
             (MovementResolverDirections direction, float distance) largestVal = (MovementResolverDirections.None, 0f);
@@ -52,8 +49,10 @@ namespace CM.RaycastResolver
                 if (distances[i].distance > largestVal.distance)
                     largestVal = distances[i];
             }
+            
+            result.Add(largestVal.direction);
 
-            return largestVal.direction;
+            return result;
         }
 
         private float GetDistance(Vector3 direction)

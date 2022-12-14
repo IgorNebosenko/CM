@@ -61,7 +61,7 @@ namespace CM.Entities
             _container = container;
             _playerInput = (PlayerInput)input;
             _entityData = data;
-            _inputConfig = container.Resolve<InputConfig>();
+            _inputConfig = _container.Resolve<InputConfig>();
 
             _movementMotor = new MovementMotor(characterController, transform, _entityData, _inputConfig);
             _cameraMotor = new CameraMotor(_camera.transform, _inputConfig);
