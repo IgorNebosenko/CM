@@ -2583,6 +2583,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 418490521316234119, guid: 7526889302ed0d840aa999407d3a2879, type: 3}
+      propertyPath: connectionData.monsterMovementTargets.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7526889302ed0d840aa999407d3a2879, type: 3}
 --- !u!4 &1490866081 stripped
