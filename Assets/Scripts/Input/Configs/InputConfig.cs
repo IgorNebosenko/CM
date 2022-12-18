@@ -13,5 +13,6 @@ namespace CM.Input.Configs
         public float playerCheckDistance = 10f;
         public float walkDuration = 2f;
         public float pursuitDuration = 3f;
+        public float pursuitBoostSpeed = 1.8f;
     }
 }

@@ -16,9 +16,9 @@ namespace CM.Entities
         [SerializeField] private NavMeshAgent agent;
         
         private DiContainer _container;
+        private MonsterInput _monsterInput;
         private EntityData _entityData;
         private InputConfig _inputConfig;
-        private MonsterInput _monsterInput;
 
         private AIMovementMotor _movementMotor;
 
@@ -34,18 +34,44 @@ namespace CM.Entities
 
         private void Update()
         {
-            _movementMotor.Simulate(Time.deltaTime);
+            var deltaTime = Time.deltaTime;
+            var cachedPosition = transform.position;
+
+            _monsterInput.Update();
+            var motorCallback = _movementMotor.Simulate(deltaTime, _monsterInput.MovementDirection,
+                _monsterInput.InputState);
+
+            switch (motorCallback)
+            {
+                case AiMotorCallback.Nothing:
+                    break;
+                case AiMotorCallback.UpdateMoveDirection:
+                    _monsterInput.UpdateDirectionMove();
+                    break;
+                case AiMotorCallback.PursuitProcess:
+                    _monsterInput.IsPursuit = true;
+                    break;
+                case AiMotorCallback.EndMoveToPlayer:
+                    _monsterInput.IsPursuit = false;
+                    break;
+            }
+
+            if (transform.position != cachedPosition)
+            {
+                for (var i = 0; i < _entityVisuals.Length; i++)
+                    _entityVisuals[i].OnIterateStep(deltaTime);
+            }
         }
 
         public void Init(DiContainer container, EntityData data, IInput input)
         {
             _container = container;
+            _monsterInput = (MonsterInput) input;
             _entityData = data;
             _inputConfig = _container.Resolve<InputConfig>();
-            _monsterInput = (MonsterInput) input;
 
-            _movementMotor = new AIMovementMotor(characterController, transform, _entityData, _inputConfig,
-                _monsterInput, agent);
+            _movementMotor = new AIMovementMotor(characterController, transform, _entityData, 
+                _inputConfig, agent, _monsterInput.Target);
         }
 
         public void DoDeath()

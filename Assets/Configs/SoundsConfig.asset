@@ -27,12 +27,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  monsterSeenPlayerEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  playerFootstepsPreset:
+  entityFootstepsPreset:
     m_AssetGUID: 51913aecb5c3d544eb99ff6095c13b54
     m_SubObjectName: 
     m_SubObjectType: 
@@ -75,3 +70,67 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   playerFootstepDuration: 0.6
+  monsterSeenPlayerEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  monsterFootstepsSounds:
+  - m_AssetGUID: ef0c58d25b1cfd444b8df33ba72a3fba
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: e414b40ccd7b25141a5d27e2f14ca376
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 14eb80195dd2b064a9c69ff6a646fdf0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: b5a5c9bd7375e9c41831a10fe5568120
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 3b51055b26dbb0640b746bf3680faded
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: af5f3f3edd58ef0439a038812fe0fa39
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 40c6691360f8c6d40bc047e6a0a4556d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 9b3340a3616cc5c4f8d1f54d7b29e302
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 2099c0da012a3e5468a75efbdadea524
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: c769ad6ca32eece4b9e36552c37c84db
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 928b56e77032bea4c98df8313cdff128
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: a987d6bcba7caa341a5297cc06393e7c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 6268c405111fbc0479a081a174d016c8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: a630148c8910b5c48ae1852eeaca49ff
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  monsterWalkFootstepDuration: 0.75
+  monsterRunFootstepDuration: 0.4

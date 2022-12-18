@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - preset
   - m_GUID: 51913aecb5c3d544eb99ff6095c13b54
-    m_Address: presets/player_slap_sound
+    m_Address: presets/entity_slap_sound
     m_ReadOnly: 0
     m_SerializedLabels:
     - preset

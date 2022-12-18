@@ -1,8 +1,6 @@
-﻿using System;
-using CM.Input.Configs;
+﻿using CM.Input.Configs;
 using CM.RaycastResolver;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CM.Input
 {
@@ -15,10 +13,12 @@ namespace CM.Input
         private TargetResolver _targetResolver;
         private InputConfig _inputConfig;
 
-        private Vector2 cachedDirection;
+        private Vector2 _cachedDirection;
 
         public Vector2 MovementDirection { get; private set; }
         public MonsterInputState InputState { get; private set; }
+        public bool IsPursuit { get; set; }
+        public IHavePosition Target => _target;
         
         public MonsterInput(IHavePosition target, InputConfig config, Transform entityTransform)
         {
@@ -39,12 +39,18 @@ namespace CM.Input
 
         public void Update()
         {
+            if (IsPursuit)
+            {
+                InputState = MonsterInputState.RunToPlayer;
+                return;
+            }
+
             var lookResult = _targetResolver.GetStatus(_target.Position, PlayerLayer);
 
             switch (lookResult)
             {
                 case MovementSearchTargetStatus.TargetOutOfBounds:
-                    MovementDirection = cachedDirection;
+                    MovementDirection = _cachedDirection;
                     InputState = MonsterInputState.DummyWalk;
                     break;
                 case MovementSearchTargetStatus.TargetNotSee:
@@ -69,23 +75,22 @@ namespace CM.Input
             {
                 
                 case MovementResolverDirections.Forward:
-                    cachedDirection = Vector2.up;
+                    _cachedDirection = Vector2.up;
                     break;
                 case MovementResolverDirections.Backward:
-                    cachedDirection = Vector2.down;
+                    _cachedDirection = Vector2.down;
                     break;
                 case MovementResolverDirections.Left:
-                    cachedDirection = Vector2.left;
+                    _cachedDirection = Vector2.left;
                     break;
                 case MovementResolverDirections.Right:
-                    cachedDirection = Vector2.right;
+                    _cachedDirection = Vector2.right;
                     break;
                 
                 case MovementResolverDirections.None:
                 default:
                     Debug.LogWarning($"[{GetType().Name}] Direction incorrect or none!");
                     break;
-                
             }
         }
 
@@ -93,6 +98,7 @@ namespace CM.Input
         {
             MovementDirection = Vector2.zero;
             InputState = MonsterInputState.DummyWalk;
+            IsPursuit = false;
         }
     }
 }
