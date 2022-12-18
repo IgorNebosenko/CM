@@ -4,7 +4,7 @@ namespace ElectrumGames.Core.Audio
 {
     internal static class Extensions
     {
-        public static void SetPreset(this AudioSource sourcePreset, AudioSource targetPreset)
+        public static void SetPreset(this AudioSource targetPreset, AudioSource sourcePreset)
         {
             targetPreset.pitch = sourcePreset.pitch;
             targetPreset.priority = sourcePreset.priority;

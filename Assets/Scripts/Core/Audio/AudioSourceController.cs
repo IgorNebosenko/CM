@@ -56,7 +56,7 @@ namespace ElectrumGames.Core.Audio
 
         public void SetPreset(AudioSource presetInstance)
         {
-            presetInstance.SetPreset(presetInstance);
+            audioSource.SetPreset(presetInstance);
         }
 
         public void Loop(bool state)

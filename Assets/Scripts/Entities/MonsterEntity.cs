@@ -10,7 +10,7 @@ using Zenject;
 
 namespace CM.Entities
 {
-    public class MonsterEntity : MonoBehaviour, IEntity
+    public class MonsterEntity : MonoBehaviour, IEntity, IHavePosition
     {
         [SerializeField] private CharacterController characterController;
         [SerializeField] private NavMeshAgent agent;
@@ -23,6 +23,8 @@ namespace CM.Entities
         private AIMovementMotor _movementMotor;
 
         private IEntityVisual[] _entityVisuals;
+        
+        public Vector3 Position => transform.position;
 
         private void Awake()
         {
@@ -30,6 +32,12 @@ namespace CM.Entities
             {
                 new MonsterSoundsHandler()
             };
+        }
+
+        private void Start()
+        {
+            for (var i = 0; i < _entityVisuals.Length; i++)
+                _entityVisuals[i].Init(_container, this);
         }
 
         private void Update()

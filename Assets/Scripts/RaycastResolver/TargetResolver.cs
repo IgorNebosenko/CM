@@ -11,11 +11,11 @@ namespace CM.RaycastResolver
         {
             _lookDistance = lookDistance;
             _transform = transform;
+            Debug.LogWarning($"[{GetType().Name}] Need check it!");
         }
 
         public MovementSearchTargetStatus GetStatus(Vector3 targetPosition, int layerToSearch)
         {
-            Debug.LogWarning($"[{GetType().Name}] Need check it!");
             if (Vector3.Distance(_transform.position, targetPosition) > _lookDistance)
                 return MovementSearchTargetStatus.TargetOutOfBounds;
 

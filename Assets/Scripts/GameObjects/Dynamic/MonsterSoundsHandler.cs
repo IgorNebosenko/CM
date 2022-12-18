@@ -12,8 +12,8 @@ namespace CM.GameObjects.Dynamic
             get
             {
                 if (_isRun)
-                    return soundsConfig.monsterWalkFootstepDuration;
-                return soundsConfig.monsterRunFootstepDuration;
+                    return soundsConfig.monsterRunFootstepDuration;
+                return soundsConfig.monsterWalkFootstepDuration;
             }
         }
         
