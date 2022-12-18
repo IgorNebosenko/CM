@@ -37,9 +37,14 @@ namespace CM.Maze.Editors
 
             EditorGUILayout.LabelField("Spawn points");
             var spawnPointsProp = ConnectionProperty.FindPropertyRelative("spawnPoints");
-            if (GUILayout.Button("+"))
+            var movementTargetsProp = ConnectionProperty.FindPropertyRelative("monsterMovementTargets");
+            if (GUILayout.Button("Add spawn point"))
                 spawnPointsProp.InsertArrayElementAtIndex(spawnPointsProp.arraySize);
+            if (GUILayout.Button("Add monster movement target"))
+                movementTargetsProp.InsertArrayElementAtIndex(movementTargetsProp.arraySize);
 
+            if (spawnPointsProp.arraySize > 0)
+                EditorGUILayout.LabelField("Spawn points:", EditorStyles.boldLabel);
             for (var i = 0; i < spawnPointsProp.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -50,6 +55,23 @@ namespace CM.Maze.Editors
 
                 EditorGUILayout.EndHorizontal();
             }
+            if (spawnPointsProp.arraySize > 0)
+                EditorGUILayout.Separator();
+            
+            if (movementTargetsProp.arraySize > 0)
+                EditorGUILayout.LabelField("Monster movement targets:", EditorStyles.boldLabel);
+            for (var i = 0; i < movementTargetsProp.arraySize; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                
+                EditorGUILayout.PropertyField(movementTargetsProp.GetArrayElementAtIndex(i));
+                if (GUILayout.Button("x"))
+                    movementTargetsProp.DeleteArrayElementAtIndex(i);
+
+                EditorGUILayout.EndHorizontal();
+            }
+            if (movementTargetsProp.arraySize > 0)
+                EditorGUILayout.Separator();
 
             serializedObject.ApplyModifiedProperties();
         }

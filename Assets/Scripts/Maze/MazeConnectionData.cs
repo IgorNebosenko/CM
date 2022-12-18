@@ -9,6 +9,7 @@ namespace CM.Maze
         public MazeLineData[] data;
 
         public Transform[] spawnPoints;
+        public Transform[] monsterMovementTargets;
 
         public MazeConnectionData(int sizeX, int sizeZ)
         {
