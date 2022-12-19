@@ -52,13 +52,28 @@ namespace CM.Maze
         public Vector3 GetMonsterSpawnPoint()
         {
             var listTransforms = new List<Transform>();
-
-            for (var i = 0; i < mazeFragments.Length; i++)
-                listTransforms.AddRange(mazeFragments[i].connectionData.spawnPoints);
+            
+            foreach (var fragment in mazeFragments)
+                listTransforms.AddRange(fragment.connectionData.spawnPoints);
 
             var spawnPoint =  listTransforms[Random.Range(0, listTransforms.Count)].position;
             spawnPoint.y = 0;
             return spawnPoint;
+        }
+
+        public List<Vector3> GetMonsterMovementPositions()
+        {
+            var listTransforms = new List<Transform>();
+            
+            foreach (var fragment in mazeFragments)
+                listTransforms.AddRange(fragment.connectionData.monsterMovementTargets);
+
+            var listPositions = new List<Vector3>();
+
+            for (var i = 0; i < mazeFragments.Length; i++)
+                listPositions.Add(listTransforms[i].position);
+            
+            return listPositions;
         }
 
         public void ResetController()
@@ -67,8 +82,6 @@ namespace CM.Maze
             var position = roofTransform.position;
             position += Vector3.up * (_startRoofHeight - position.y);
             roofTransform.position = position;
-            
-            
         }
     }
 }
