@@ -14,8 +14,7 @@ namespace CM.Input
         private InputConfig _inputConfig;
 
         private Vector2 _cachedDirection;
-
-        public Vector2 MovementDirection { get; private set; }
+        
         public MonsterInputState InputState { get; private set; }
         public bool IsPursuit { get; set; }
         public IHavePosition Target => _target;
@@ -39,30 +38,31 @@ namespace CM.Input
 
         public void Update()
         {
-            if (IsPursuit)
-            {
-                InputState = MonsterInputState.RunToPlayer;
-                return;
-            }
-
-            var lookResult = _targetResolver.GetStatus(_target.Position, PlayerLayer);
-
-            switch (lookResult)
-            {
-                case MovementSearchTargetStatus.TargetOutOfBounds:
-                    MovementDirection = _cachedDirection;
-                    InputState = MonsterInputState.DummyWalk;
-                    break;
-                case MovementSearchTargetStatus.TargetNotSee:
-                    InputState = MonsterInputState.GoToPlayerPosition;
-                    break;
-                case MovementSearchTargetStatus.TargetSeen:
-                    InputState = MonsterInputState.RunToPlayer;
-                    break;
-                default:
-                    Debug.LogWarning($"[{GetType().Name}] Unhandled behaviour of input!");
-                    break;
-            }
+            InputState = MonsterInputState.DummyWalk;
+            // if (IsPursuit)
+            // {
+            //     InputState = MonsterInputState.RunToPlayer;
+            //     return;
+            // }
+            //
+            // var lookResult = _targetResolver.GetStatus(_target.Position, PlayerLayer);
+            //
+            // switch (lookResult)
+            // {
+            //     case MovementSearchTargetStatus.TargetOutOfBounds:
+            //         MovementDirection = _cachedDirection;
+            //         InputState = MonsterInputState.DummyWalk;
+            //         break;
+            //     case MovementSearchTargetStatus.TargetNotSee:
+            //         InputState = MonsterInputState.GoToPlayerPosition;
+            //         break;
+            //     case MovementSearchTargetStatus.TargetSeen:
+            //         InputState = MonsterInputState.RunToPlayer;
+            //         break;
+            //     default:
+            //         Debug.LogWarning($"[{GetType().Name}] Unhandled behaviour of input!");
+            //         break;
+            // }
         }
 
         public void UpdateDirectionMove()
@@ -96,7 +96,6 @@ namespace CM.Input
 
         public void ResetInput()
         {
-            MovementDirection = Vector2.zero;
             InputState = MonsterInputState.DummyWalk;
             IsPursuit = false;
         }

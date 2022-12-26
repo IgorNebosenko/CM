@@ -1,5 +1,7 @@
-﻿using CM.Input;
+﻿using System.Collections.Generic;
+using CM.Input;
 using CM.Input.Configs;
+using CM.Maze;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,86 +9,57 @@ namespace CM.Entities.Motors
 {
     public class AIMovementMotor
     {
-        private CharacterController _characterController;
-        private Transform _entityTransform;
+        private NavMeshAgent _agent;
+        private Transform _agentTransform;
         private EntityData _entityData;
         private InputConfig _inputConfig;
-        private NavMeshAgent _agent;
-        private IHavePosition _target;
+        private IHavePosition _player;
+        private List<Vector3> _movementPositions;
 
-        private float _timeMovePassed;
+        private Vector3 _targetPosition;
         private float _timePursuitPassed;
 
-        private Vector3? _targetPosition;
-
-        public AIMovementMotor(CharacterController characterController, Transform entityTransform, EntityData entityData,
-            InputConfig inputConfig, NavMeshAgent agent, IHavePosition target)
+        public AIMovementMotor(NavMeshAgent agent, EntityData entityData,
+            InputConfig inputConfig, IHavePosition player, MazeController mazeController)
         {
-            _characterController = characterController;
-            _entityTransform = entityTransform;
+            _agent = agent;
+            _agentTransform = _agent.transform;
             _entityData = entityData;
             _inputConfig = inputConfig;
-            _agent = agent;
-            _target = target;
+            _player = player;
+            _movementPositions = mazeController.GetMonsterMovementPositions();
         }
 
-        public AiMotorCallback Simulate(float deltaTime, Vector2 inputDirection, MonsterInputState state)
+        public void Init()
+        {
+            RandomChangeWalkPosition();
+        }
+
+        public void Simulate(float deltaTime, MonsterInputState state)
         {
             switch (state)
             {
                 case MonsterInputState.DummyWalk:
-                    _timeMovePassed += deltaTime;
-
-                    if (_targetPosition != null)
-                    {
-                        _targetPosition = null;
-                        _agent.isStopped = true;
-                    }
-
-                    var velocity = (_entityTransform.right * inputDirection.x +
-                                    _entityTransform.forward * inputDirection.y) *
-                                   _entityData.speed;
-                    _characterController.Move(velocity * deltaTime);
-                    
-                    if (_timeMovePassed >= _inputConfig.walkDuration)
-                    {
-                        _timeMovePassed -= _inputConfig.walkDuration;
-                        return AiMotorCallback.UpdateMoveDirection;
-                    }
-                    return AiMotorCallback.Nothing;
-                case MonsterInputState.GoToPlayerPosition:
-                    if (_targetPosition == null)
-                        ActivateAgent();
-
-                    if (Vector3.Distance(_targetPosition.Value, _entityTransform.position) < 0.1f)
-                        return AiMotorCallback.EndMoveToPlayer;
-                    return AiMotorCallback.Nothing;
-                case MonsterInputState.RunToPlayer:
-                    _timePursuitPassed += deltaTime;
-
-                    if (_targetPosition == null)
-                        ActivateAgent(_inputConfig.pursuitBoostSpeed);
-                    else
-                        _agent.destination = _target.Position;
-
-                    if (_timePursuitPassed >= _inputConfig.pursuitDuration)
-                    {
-                        _timePursuitPassed = 0f;
-                        return AiMotorCallback.EndPursuitPlayer;
-                    }
-                    return AiMotorCallback.EndPursuitPlayer;
-                default:
-                    Debug.LogWarning($"[{GetType().Name}] Unhandled state variant!");
-                    return AiMotorCallback.Nothing;
+                    if (Vector3.Distance(_agentTransform.position, _targetPosition) <=
+                        _inputConfig.minimalDistanceToWalkTarget)
+                        RandomChangeWalkPosition();
+                    break;
             }
         }
 
-        private void ActivateAgent(float speedModifier = 1f)
+        private void RandomChangeWalkPosition()
         {
-            _agent.isStopped = false;
-            _targetPosition = _target.Position;
-            _agent.speed = _entityData.speed * speedModifier;
-            _agent.destination = _targetPosition.Value;
+            MoveTo(_movementPositions[Random.Range(0, _movementPositions.Count)], false);
+        }
+
+        private void MoveTo(Vector3 targetPosition, bool isPursuit)
+        {
+            _targetPosition = targetPosition;
+            _agent.destination = targetPosition;
+            
+            _agent.speed = _entityData.speed;
+            if (isPursuit)
+                _agent.speed *= _inputConfig.pursuitBoostSpeed;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CM.Input.Configs
         [Space] 
         public float movementMonsterLookDistance = 3f;
         public float playerCheckDistance = 10f;
-        public float walkDuration = 2f;
+        public float minimalDistanceToWalkTarget = 0.25f;
         public float pursuitDuration = 3f;
         public float pursuitBoostSpeed = 1.8f;
     }

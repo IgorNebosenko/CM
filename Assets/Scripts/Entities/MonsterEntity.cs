@@ -1,9 +1,9 @@
-﻿using System;
-using CM.Entities.Motors;
+﻿using CM.Entities.Motors;
 using CM.GameObjects.Dynamic;
 using CM.GameObjects.Visual;
 using CM.Input;
 using CM.Input.Configs;
+using CM.Maze;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -12,13 +12,13 @@ namespace CM.Entities
 {
     public class MonsterEntity : MonoBehaviour, IEntity, IHavePosition
     {
-        [SerializeField] private CharacterController characterController;
         [SerializeField] private NavMeshAgent agent;
         
         private DiContainer _container;
         private MonsterInput _monsterInput;
         private EntityData _entityData;
         private InputConfig _inputConfig;
+        private MazeController _mazeController;
 
         private AIMovementMotor _movementMotor;
 
@@ -46,23 +46,8 @@ namespace CM.Entities
             var cachedPosition = transform.position;
 
             _monsterInput.Update();
-            var motorCallback = _movementMotor.Simulate(deltaTime, _monsterInput.MovementDirection,
+            _movementMotor.Simulate(deltaTime,
                 _monsterInput.InputState);
-
-            switch (motorCallback)
-            {
-                case AiMotorCallback.Nothing:
-                    break;
-                case AiMotorCallback.UpdateMoveDirection:
-                    _monsterInput.UpdateDirectionMove();
-                    break;
-                case AiMotorCallback.PursuitProcess:
-                    _monsterInput.IsPursuit = true;
-                    break;
-                case AiMotorCallback.EndMoveToPlayer:
-                    _monsterInput.IsPursuit = false;
-                    break;
-            }
 
             if (transform.position != cachedPosition)
             {
@@ -77,9 +62,11 @@ namespace CM.Entities
             _monsterInput = (MonsterInput) input;
             _entityData = data;
             _inputConfig = _container.Resolve<InputConfig>();
+            _mazeController = _container.Resolve<MazeController>();
 
-            _movementMotor = new AIMovementMotor(characterController, transform, _entityData, 
-                _inputConfig, agent, _monsterInput.Target);
+            _movementMotor = new AIMovementMotor(agent, _entityData,
+                _inputConfig, _monsterInput.Target, _mazeController);
+            _movementMotor.Init();
         }
 
         public void DoDeath()

@@ -59,7 +59,7 @@ namespace CM.Core
             // Container.Bind<IProjectorTokenResourceProvider>().To<GameProjectorsTokenProvider>().FromResolve()
             //     .WhenInjectedInto<ProjectorToken.Factory>();
 
-            Container.Bind<MazeController>().FromInstance(mazeController).WhenInjectedInto<IManager>();
+            Container.Bind<MazeController>().FromInstance(mazeController).AsSingle();
         }
 
 
