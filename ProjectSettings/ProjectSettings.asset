@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: ElectrunGames
+  companyName: ElectrumGames
   productName: Creepy Maze
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
